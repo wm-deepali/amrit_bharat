@@ -7,7 +7,7 @@
                         <i class="fas fa-users align-self-center"></i>
                         <div class="stats-con">
                             <p>Total Posts</p>
-                            <h3>{{ $post->count() ?? '0' }}</h3>
+                            <h3>{{ $postCount  ?? '0' }}</h3>
                         </div>
                     </div>
                 </div>
@@ -16,7 +16,7 @@
                         <i class="fas fa-box align-self-center"></i>
                         <div class="stats-con">
                             <p>Total Reporter</p>
-                            <h3>{{ $reporter->count() ?? '0' }}</h3>
+                            <h3>{{ $reporterCount ?? '0' }}</h3>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         <i class="fas fa-file align-self-center"></i>
                         <div class="stats-con">
                             <p>Total Visitors</p>
-                            <h3>{{ $post->SUM('views') ?? '0' }}</h3>
+                            <h3>{{ $totalViews ?? '0' }}</h3>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <i class="fas fa-dollar-sign align-self-center"></i>
                         <div class="stats-con">
                             <p>Pending Posts</p>
-                            <h3>{{ $pendingpost->count() ?? '0' }}</h3>
+                            <h3>{{ $pendingCount ?? '0' }}</h3>
                         </div>
                     </div>
                 </div>

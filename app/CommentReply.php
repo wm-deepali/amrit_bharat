@@ -8,7 +8,7 @@ use DateTimeInterface;
 class CommentReply extends Model
 {
     //
-    protected $table= "comment_replies";
+    protected $table = "comment_replies";
     protected $fillable = ['id', 'user_id', 'comment_id', 'reply', 'total_likes', 'created_at'];
 
     public function comment()
@@ -24,25 +24,27 @@ class CommentReply extends Model
     {
         return $this->belongsTo('App\User');
     }
-    
+
     public function replylike()
     {
-        return $this->hasMany('App\ReplyLike');
+        return $this->hasMany('App\ReplyLike', 'reply_id', 'id');
     }
 
-    protected static function booted () {
-        static::deleting(function(CommentReply $commentreply) { // before delete() method call this
-             $commentreply->replylike()->delete();
-             // do the rest of the cleanup...
+
+    protected static function booted()
+    {
+        static::deleting(function (CommentReply $commentreply) { // before delete() method call this
+            $commentreply->replylike()->delete();
+            // do the rest of the cleanup...
         });
     }
 
-    
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
     }
 
 
-    
+
 }

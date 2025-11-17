@@ -26,22 +26,30 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
         try {
-            if(Auth::user()->role=='admin'){
-                $reporter=User::where('role','reporter')->get();
-                $pendingpost=Post::where('status','pending')->get();
-                $post=Post::all();
+            $user = Auth::user();
+
+            // Common
+            $reporterCount = User::where('role', 'reporter')->count();
+
+            if ($user->role == 'admin') {
+
+                $postCount = Post::count();
+                $pendingCount = Post::where('status', 'pending')->count();
+                $totalViews = Post::sum('views');
+
+            } else {
+
+                $postCount = Post::where('user_id', $user->id)->count();
+                $pendingCount = Post::where('user_id', $user->id)->where('status', 'pending')->count();
+                $totalViews = Post::where('user_id', $user->id)->sum('views');
             }
-            else{
-                $reporter=User::where('role','reporter')->get();
-                $pendingpost=Post::where('user_id', $user->id)->where('status','pending')->get();
-                $post=Post::where('user_id', $user->id)->get();
-            }
-            return view('admin.index')->with('post',$post)
-            ->with('reporter',$reporter)->with('pendingpost',$pendingpost);
+
+            return view('admin.index', compact('postCount', 'pendingCount', 'reporterCount', 'totalViews'));
+
         } catch (\Exception $ex) {
             dd($ex->getMessage());
         }
     }
+
 }
