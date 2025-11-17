@@ -1,0 +1,49 @@
+header {
+    .top-bar {
+      .navbar-top {
+          .navbar-brand {
+              img {
+                  height: 50px;
+              }
+          }
+          .navbar-nav {
+              li {
+                  &.dropdown {
+                      span {
+                          img {
+                            height: 30px;
+                            border-radius: 50%;
+                            margin-right: 10px;
+                            width: 30px;
+                          }
+                      }
+                      a {
+                          font-weight: 500;
+                          color: $dark;
+                      }
+                  }
+              }
+          }
+      }
+    }
+    .middle-bar {
+        background: $dark;
+		.navbar {
+			padding: 0;
+		}
+        .navbar-nav {
+            li {
+                padding: 0;
+                .nav-link {
+                    color: $white;
+					    padding: 10px 20px;
+                    font-family: $nunito;
+                    &:hover {
+                        text-decoration: none;
+						background: $black;
+                    }
+                }
+            }
+        }
+    }
+}

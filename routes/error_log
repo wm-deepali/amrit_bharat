@@ -1,0 +1,4 @@
+[18-May-2021 09:38:37 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Route' not found in /home/prakashprabhaws/public_html/routes/web.php:20
+Stack trace:
+#0 {main}
+  thrown in /home/prakashprabhaws/public_html/routes/web.php on line 20

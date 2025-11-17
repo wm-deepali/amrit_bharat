@@ -1,0 +1,105 @@
+@media screen and (max-width:767px){
+	header .middle-bar .navbar-toggler {
+		color: #fff;
+	}
+	.content-main-body {
+    	padding: 10px;
+	}
+	.stats-box .stats-con p {
+    	margin: 0;
+	}
+	.content-header .btn {
+		padding: 4px 10px;
+    	font-size: 12px;
+	}
+	.content-main-body .card .card-body .card-block .form-section-h {
+    	margin-bottom: 5px;
+    	font-size: 14px;
+	}
+	footer {
+    	display: block;
+    	padding: 10px;
+    	background: #333;
+    	font-size: 13px;
+    	color: #fff;
+	}
+	.stats-box {
+    	border: 1px dotted #333;
+    	text-align: center;
+		margin-bottom: 10px;
+    	border-radius: 5px;
+	}
+	.breadcrumb-section .content-header .content-header-title {
+    	font-size: 1em;
+    }
+	.breadcrumb-section .content-header .breadcrumb li {
+    	text-transform: uppercase;
+    	font-size: 12px;
+	}
+	.content-main-body .card .card-body .card-block .table-fitems tr th, .content-main-body .card .card-body .card-block .table-fitems tr td {
+    	font-size: 12px;
+    }
+	.content-main-body .card .card-body .card-block .label-control {
+    	margin: 2px 0;
+	}
+	.breadcrumb-section .content-header .breadcrumb {
+    	margin: 19px 0 0 0;
+    	display: inline-flex;
+	}
+	.content-main-body .card .card-body .card-block .table-fitems tr th {
+    	background-color: #333;
+    	color: #fff;
+    	font-size: 12px;
+	}
+}
+
+@media screen and (min-width:768px) and (max-width:991px){
+	header .middle-bar .navbar-toggler {
+		color: #fff;
+	}
+	.content-main-body {
+    	padding: 10px;
+	}
+	.stats-box .stats-con p {
+    	margin: 0;
+	}
+	.content-header .btn {
+		padding: 5px 15px;
+    	font-size: 14px;
+	}
+	.content-main-body .card .card-body .card-block .form-section-h {
+    	margin-bottom: 5px;
+    	font-size: 14px;
+	}
+	footer {
+    	display: block;
+    	padding: 10px;
+    	background: #333;
+    	font-size: 13px;
+    	color: #fff;
+	}
+	.stats-box {
+    	border: 1px dotted #333;
+    	text-align: center;
+		margin-bottom: 10px;
+    	border-radius: 5px;
+	}
+	.breadcrumb-section .content-header .content-header-title {
+    	font-size: 1em;
+    }
+	.breadcrumb-section .content-header .breadcrumb li {
+    	text-transform: uppercase;
+    	font-size: 12px;
+	}
+	.content-main-body .card .card-body .card-block .table-fitems tr th, .content-main-body .card .card-body .card-block .table-fitems tr td {
+    	font-size: 12px;
+    }
+	.content-main-body .card .card-body .card-block .label-control {
+    	margin: 2px 0;
+	}
+	.content-main-body .card .card-body .card-block .table-fitems tr th {
+    	background-color: #333;
+    	color: #fff;
+    	font-size: 12px;
+	}
+}

@@ -1,0 +1,1 @@
+<a href="{{ route('postdetail',[$post->categories[0]->category->slug,$post->slug]) }}" target="_blank">View Link</a>

@@ -1,0 +1,342 @@
+@media screen and (max-width:767px){
+    header .main-header .main-logo img {
+        height: 60px;
+    }
+    header .main-header .social-ul ul {
+        float: none;
+        margin: 10px 0;
+        list-style: none;
+    }
+    .search-head {
+        width:54% !important;
+    }
+    header .main-header .main-logo {
+    padding: 10px 0;
+    text-align: center;
+}
+.page-content .photo-article .mr-main img {
+    width: 100%;
+}
+    header .navigation-menu .navbar-toggler {
+        color: #fff;
+    }
+    .page-content .slider-section .carousel-caption h3 {
+    font-size: 13px;
+    }
+    header .navigation-menu .navbar {
+        justify-content: flex-end;
+    }
+    header .bottom-menu {
+        display: none;
+    }
+    .page-content .photo-article .mr-main img {
+        width: 100%;
+    }
+    footer .middle-footer ul {
+        border-right: none;
+    }
+    footer .middle-footer ul {
+    margin: 10px 0;
+    }
+    
+    /** category page **/
+    .article-listing .media img {
+        height: 110px;
+        width: 110px;
+    }
+    .article-listing .media a h5 {
+        font-size: 11px;
+    }
+    .article-listing .media .div-tags ul li a, .article-listing .media .div-tags ul li .btn-link {
+        font-size: 11px;
+    }
+    .article-listing .media a .posted-on {
+        font-size: 9px;
+    }
+    .article-listing .media a p {
+        font-size: 11px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        margin-bottom: 5px;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    /**Post Detail **/
+    .breadcrumb-sec .breadcrumb-m ol li {
+        font-size: 10px;
+    }
+    .news-details .news-title {
+        font-size: 1em;
+    }
+    .news-details .news-det li {
+        font-size: 12px;
+    }
+    
+    /** Inner Pages **/
+    .about-us h3 {
+        font-size: 1.2em;
+    }
+    .about-us p {
+        font-size: 0.8em;
+    }
+    .publishers-authors .heading-pa p {
+        font-size: 11px;
+    }
+    .publishers-authors .heading-pa h2 {
+        font-size: 1.3em;
+    }
+    .contact-page-2 .contact-form-block {
+        padding: 1em;
+    }
+    .contact-page-2 .contact-form-block .section-title h2 {
+        font-size: 24px;
+    }
+    .contact-page-2 .contact-form-block .section-title p {
+        font-size: 0.8em;
+    }
+    .contact-page-1 img {
+        height: 120px;
+    }   
+    .contact-page-2 .contact-info-wrapper .contact-info-inner {
+        padding: 2em;
+    }
+    .contact-page-2 .contact-info-wrapper .contact-info-inner h2 {
+        font-size: 23px;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:991px){
+    header .navigation-menu .navbar-toggler {
+        color: #fff;
+    }
+    header .navigation-menu .navbar {
+        justify-content: flex-end;
+    }
+    header .main-header .main-logo img {
+        height: 55px;
+    }
+    header .bottom-menu .extra-highlights ul li a, header .bottom-menu .extra-highlights ul li button {
+        font-size: 0.7em;
+        padding: 3px 8px;
+        line-height: 23px;
+    }
+    .ad-header {
+        padding: 12px 0;
+    }
+    header .main-header .main-logo {
+        padding: 5px 0;
+    }
+    .page-content .photo-article .mr-main1 img {
+        height: 150px;
+    }
+    .page-content .photo-article .mr-main1 a h3 {
+        font-size: 9px;
+        margin: 3px 0;
+    }
+    .search-head {
+        width: 90%;
+    }
+    .page-content .photo-article .mr-main img {
+    height: 314px;
+    }
+    .page-content .sidebar-articles .inner-sd-article > a h3 {
+        font-size: 13px;
+    }
+    .page-content .new-eightbyfour .news-block .block-main ul li a {
+        font-size: 12px;
+    }
+    .page-content .sidebar-articles .inner-sd-article .bullet-list li a {
+        font-size: 11px;
+    }
+    .page-content .sidebar-articles .inner-sd-article .bullet-list li {
+        line-height: 10px;
+    }
+    .slider-section .carousel-inner .carousel-caption h3 {
+        font-size: 16px;
+    }
+    .slider-section .carousel-inner img {
+        height: 200px;
+    }
+    .page-content .new-eightbyfour .news-block .block-main ul li {
+        line-height: 12px;
+    }
+    .page-content .slider-section {
+        padding: 10px 0;
+    }
+    .page-content .trending-articles {
+        padding: 1em 0;
+    }
+    .page-content .trending-articles ul li a {
+        font-size: 11px;
+    }
+    .page-content .trending-articles .section-title h3 {
+        font-size: 1.4em;
+    }
+    .page-content .trending-articles .section-title h3 .trend-ico {
+        display: none;
+    }
+    .page-content .recent-post-bycat .main-postbycat a .postbycat-img img {
+        height: 130px;
+    }
+    .page-content .recent-post-bycat .main-postbycat a h3 {
+        font-size: 10px;
+    }
+    .page-content .recent-post-bycat .main-postbycat .bullet-list li a {
+        font-size: 10px;
+    }
+    .page-content .recent-post-bycat .main-postbycat .bullet-list li {
+        line-height: 9px;
+    }
+    .page-content .recent-post-bycat .main-postbycat .bullet-list li:before {
+    content: '';
+        top: 5px;
+        left: -12px;
+        width: 4px;
+        height: 4px;
+    }
+    .page-content .health-article .mr-main a h3 {
+        font-size: 9px;
+    }
+    .page-content .video-article .video-tabs-m img {
+        height: 118px;
+    }
+    .page-content .video-article .video-tabs-m a:before {
+        top: 14%;
+    }
+    .page-content .video-article .video-tabs-m a p {
+        font-size: 11px;
+    }
+    .page-content .health-article .mr-main img {
+    height: 100px;
+    }
+    .page-content .must-read .mr-main img {
+        height: 85px;
+    }
+    .page-content .must-read .mr-main a h3 {
+        font-size: 10px;
+    }
+    .page-content .youmay-article .mr-main img {
+        height: 150px;
+    }
+    .page-content .youmay-article .mr-main a h3 {
+        font-size: 12px;
+    }
+    footer .middle-footer {
+        padding: 1em 0;
+    }
+    footer .bottom-footer p {
+        font-size: 0.8em;
+    }
+    footer .middle-footer ul li.title {
+        font-size: 12px;
+    }
+    footer .middle-footer ul li a {
+        font-weight: 400;
+        font-size: 0.7em;
+    }
+    
+    /** category page **/
+    .article-listing .media img {
+        height: 110px;
+        width: 110px;
+    }
+    .article-listing .media a h5 {
+        font-size: 13px;
+    }
+    .article-listing .media .div-tags ul li a, .article-listing .media .div-tags ul li .btn-link {
+        font-size: 11px;
+    }
+    .article-listing .media a .posted-on {
+        font-size: 9px;
+    }
+    .article-listing .media a p {
+        font-size: 11px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        margin-bottom: 5px;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    /**Post Detail **/
+    .breadcrumb-sec .breadcrumb-m ol li {
+        font-size: 12px;
+    }
+    .news-details .news-title {
+       font-size: 1.4em;
+    }
+    .news-details .news-det li {
+        font-size: 12px;
+    }
+    
+    /**Inner Pages **/
+    .publishers-authors .team-main .team-img img {
+        height: 160px;
+    }
+    .publishers-authors .team-main .team-con h3 {
+        font-size: 14px;
+    }
+    .publishers-authors .team-main .team-con h4 {
+        font-size: 12px;
+    }
+    .contact-page-1 img {
+        height: 200px;
+    }
+    .contact-page-2 .contact-form-block {
+        padding: 2em;
+    }
+    .contact-page-2 .contact-info-wrapper .contact-info-inner {
+        padding: 2em;
+    }
+    
+}
+
+@media screen and (min-width:992px) and (max-width:1199px){
+    .carousel-caption {
+        right: 8%;
+        left: 8%;
+    }
+    .page-content .slider-section .carousel-caption h3 {
+        font-size: 16px;
+    }
+    /** category page **/
+    .article-listing .media img {
+        height: 140px;
+        width: 175px;
+    }
+    
+    .article-listing .media a h5 {
+        font-size: 16px;
+    }
+    .article-listing .media .div-tags ul li a, .article-listing .media .div-tags ul li .btn-link {
+        font-size: 11px;
+    }
+    .article-listing .media a .posted-on {
+        font-size: 9px;
+    }
+    .article-listing .media a p {
+        font-size: 11px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        margin-bottom: 5px;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    /**Post Detail **/
+    .breadcrumb-sec .breadcrumb-m ol li {
+        font-size: 12px;
+    }
+    .news-details .news-title {
+       font-size: 2em;
+    }
+    .news-details .news-det li {
+        font-size: 12px;
+    }
+    
+    /**Inner**/
+    .contact-page-2 .contact-form-block {
+        padding: 2em;
+    }
+}

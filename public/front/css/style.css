@@ -1,0 +1,1199 @@
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Nunito&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre&display=swap");
+header .top-bar {
+  background: #fff;
+  padding: 5px; }
+  header .top-bar .datetime-head {
+    margin: 0;
+    color: #000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.9em;
+    padding: 4px 0; }
+  header .top-bar .social-head {
+    float: right; }
+    header .main-header .social-ul ul li a {
+    color: #ec0000;
+    border: 1px solid #ec0000;
+    height: 27px;
+    width: 27px;
+    display: inline-block;
+    line-height: 26px;
+    border-radius: 3px;
+}
+.search-head button {
+    height: 30px;
+    line-height: 15px;
+}
+
+.search-head input {
+    height: 30px;
+}
+.search-head {
+    width: 65%;
+    float: right;
+}
+header .main-header .social-ul ul li {
+    display: inline-block;
+        margin-right: 10px;
+}
+header .main-header .social-ul ul {
+    padding: 0;
+    float:right;
+    margin: 0;
+    list-style: none;
+}
+    header .top-bar .social-head ul {
+      padding: 0;
+      margin: 0;
+      list-style: none; }
+      header .top-bar .social-head ul li {
+        display: inline-block;
+        margin: 0 5px; }
+        header .top-bar .social-head ul li a {
+          display: inline-block;
+          color: #333;
+          text-align: center;
+          font-size: 13px;
+          padding: 2px 6px;
+          border-radius: 3px; }
+header .main-header {
+  background: #fff;
+  text-align: center; }
+  header .main-header .main-logo {
+    padding: 0px 0; 
+      text-align:center;
+  }.ad-header {
+    padding: 10px 0;
+}
+    header .main-header .main-logo img {
+      height: 100px; }
+  header .main-header .head-ad {
+    float: right; }
+    header .main-header .head-ad img {
+      height: 90px; }
+  header .main-header h4 {
+    margin: 5px 0;
+    font-size: 16px; }
+header .navigation-menu {
+  background: #e63401; 
+    height:45px;
+}
+  header .navigation-menu .navbar {
+    padding: 0;
+    /*border-top: 1px solid #ec0000;*/
+    /*border-bottom: 1px solid #ec0000;*/
+    }
+    header .navigation-menu .navbar .navbar-nav li.dropdown .dropdown-menu {
+      max-width: 300px; }
+      header .navigation-menu .navbar .navbar-nav li.dropdown .dropdown-menu li {
+        white-space: pre-wrap;
+        line-height: initial;
+        padding: 0;
+        border-bottom: 1px solid #3333331f; }
+        header .navigation-menu .navbar .navbar-nav li.dropdown .dropdown-menu li:last-child {
+          border-bottom: none; }
+        header .navigation-menu .navbar .navbar-nav li.dropdown .dropdown-menu li.active {
+          background: #fff; }
+        header .navigation-menu .navbar .navbar-nav li.dropdown .dropdown-menu li a {
+          padding: 0.25rem 1.5rem;
+          color: #000;
+          display: block; }
+          header .navigation-menu .navbar .navbar-nav li.dropdown .dropdown-menu li a:hover {
+            color: #fff;
+            text-decoration: none; }
+    header .navigation-menu .navbar .navbar-nav li a {
+     color: #fff;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1em;
+    padding: 10px 14px; }
+      header .navigation-menu .navbar .navbar-nav li a.red {
+        color: #222222; }
+      header .navigation-menu .navbar .navbar-nav li a.blue {
+        color: #222222; }
+      header .navigation-menu .navbar .navbar-nav li a:hover {
+        background: #a50000;
+        color: #fff; }
+header .bottom-menu {
+  background: #f4f4f4; }
+  header .bottom-menu .extra-highlights {
+    padding: 10px 10px; }
+    header .bottom-menu .extra-highlights ul {
+      padding: 0;
+      margin: 0;
+      list-style: none; }
+      header .bottom-menu .extra-highlights ul li {
+        display: inline-block; }
+        header .bottom-menu .extra-highlights ul li a,header .bottom-menu .extra-highlights ul li button {
+          color: #000;
+          font-size: 0.9em;
+          padding: 2px 20px;
+          display: inline-block;
+          text-transform: capitalize;
+          font-weight: 500; }
+          header .bottom-menu .extra-highlights ul li a:hover,header .bottom-menu .extra-highlights ul li button:hover {
+            text-decoration: none; }
+.slider-section .carousel-inner img {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 300px;
+}
+.article-listing .media img {
+    height: 180px;
+    width: 250px;
+}
+.page-content {
+  /**Sidebar**/ }
+  .page-content .slider-section {
+    padding: 20px 0; }
+  .page-content .three-post .post-main-t img {
+    width: 100%;
+    height: 200px; }
+  .page-content .three-post .post-main-t h2 {
+    background: #333;
+    padding: 7px 4px;
+    margin: 0;
+    line-height: 15px; }
+    .page-content .three-post .post-main-t h2 a {
+      font-size: 16px;
+      display: inline-block;
+      color: #fff; }
+      .page-content .three-post .post-main-t h2 a:hover {
+        text-decoration: none; }
+  .page-content .trending-articles {
+    padding: 2em 0; }
+    .page-content .trending-articles ul {
+      padding: 0;
+      list-style: none;
+      margin: 0; }
+      .page-content .trending-articles ul li a {
+        color: #333;
+        display: block;
+        padding: 5px;
+        font-family: "Frank Ruhl Libre", serif;
+        border-bottom: 1px solid #AAA; }
+        .page-content .trending-articles ul li a:hover {
+          color: #222222;
+          text-decoration-color: #AAA; }
+      .page-content .trending-articles ul li:last-child a {
+        border-bottom: none; }
+  /*.page-content .recent-post-bycat {*/
+  /*  padding: 2em 0 0 0; }*/
+    .page-content .recent-post-bycat .main-postbycat {
+      margin: 10px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      padding:20px;
+        
+    }
+      .page-content .recent-post-bycat .main-postbycat a .postbycat-img {
+        position: relative; }
+        .page-content .recent-post-bycat .main-postbycat a .postbycat-img img {
+          width: 100%;
+          height: 180px; }
+       .page-content .recent-post-bycat .main-postbycat a .postbycat-img span {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 0.9em;
+    background: #e63401;
+    padding: 2px 9px;
+    color: #fff;
+    border-radius: 4px;
+}
+     .page-content .recent-post-bycat .main-postbycat a h3 {
+    font-size: 1.1em;
+    margin: 8px 0;
+    font-weight: 600;
+    text-align: justify;
+    font-family: "Frank Ruhl Libre", serif;
+    color: #000;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+      .page-content .recent-post-bycat .main-postbycat a:hover {
+        text-decoration: none; }
+        .page-content .recent-post-bycat .main-postbycat a:hover h3 {
+          color: #222222; }
+      .page-content .recent-post-bycat .main-postbycat .bullet-list {
+        list-style: none;
+        margin: 10px 0 0 0;
+        padding: 0 0 0 15px; }
+        .page-content .recent-post-bycat .main-postbycat .bullet-list li {
+          position: relative;
+          display: block;
+          width: 100%;
+          margin-bottom: 10px;
+          text-align: justify;
+          margin-right: 0; }
+          .page-content .recent-post-bycat .main-postbycat .bullet-list li:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: -15px;
+            width: 6px;
+            height: 6px;
+            background: #222222; }
+          .page-content .recent-post-bycat .main-postbycat .bullet-list li a {
+            color: #000;
+            font-family: "Frank Ruhl Libre", serif; }
+            .page-content .recent-post-bycat .main-postbycat .bullet-list li a:hover {
+              text-decoration: underline; }
+  .page-content .most-read h4 {
+    font-size: 17px;
+    color: #333;
+    padding-bottom: 5px; }
+  .page-content .most-read .mr-main img {
+    height: 160px;
+    width: 100%; }
+  .page-content .most-read .mr-main a h3 {
+    color: #000;
+    font-family: "Frank Ruhl Libre", serif;
+    font-size: 1em;
+    margin: 3px 0;
+    font-weight: 600; }
+  .page-content .most-read .mr-main a:hover {
+    text-decoration: none; }
+    .page-content .most-read .mr-main a:hover h3 {
+      color: #222222; }
+  .page-content .health-article {
+    padding: 40px }
+    .page-content .health-article .mr-main {
+      padding-top: 1em; }
+      .page-content .health-article .mr-main img {
+        height: 160px;
+        width: 100%; }
+  .page-content .health-article .mr-main a h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #000;
+    font-size: 0.9em;
+    font-family: "Frank Ruhl Libre", serif;
+    margin: 3px 0;
+}
+        .page-content .health-article .mr-main a:hover h3 {
+          color: #222222; }
+  .page-content .video-article {
+      padding:30px;
+    padding-bottom: 10px; }
+          
+    .page-content .video-article .video-tabs-m {
+      margin-bottom: 1em;
+      padding:10px;
+      border-radius:7px;
+       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        
+    }
+      .page-content .video-article .video-tabs-m img {
+        height: 215px;
+        width: 100%; }
+      .page-content .video-article .video-tabs-m a {
+        position: relative;
+        display: block;
+        color: #333;
+        text-decoration: none;
+        font-size: 15px; }
+        .page-content .video-article .video-tabs-m a:before {
+          position: absolute;
+          top: 32%;
+          left: 0;
+          right: 0;
+          margin: auto;
+          height: 45px;
+          width: 45px;
+          content: "";
+          background: url("../images/play.png");
+          background-size: 100% auto;
+          z-index: 9; }
+        .page-content .video-article .video-tabs-m a p {
+          margin: 5px 0 10px;
+          font-family: "Frank Ruhl Libre", serif;
+          font-size: 1em; }
+        .page-content .video-article .video-tabs-m a:hover p {
+          color: #222222; }
+    .page-content .video-article .nav-tabs {
+      margin-bottom: 20px; }
+      .page-content .video-article .nav-tabs li a {
+        color: #333;
+        border: none;
+        font-weight: 600; }
+        .page-content .video-article .nav-tabs li a.active {
+          color: #222222;
+          border-bottom: 1px solid #333; }
+    .page-content .video-article .more-videos a {
+      color: #222222;
+      font-size: 0.8em;
+      font-family: "Roboto", sans-serif; }
+      .page-content .video-article .more-videos a i {
+        font-size: 90%;
+        color: #333; }
+  .page-content .photo-article .mr-main {
+    padding-top: 1em;
+    position: relative; }
+    .page-content .photo-article .mr-main img {
+      height: 412px;
+      width: 100%; }
+    .page-content .photo-article .mr-main a h3 {
+      color: #fff;
+      font-size: 1em;
+      margin: 3px 0; }
+    .page-content .photo-article .mr-main a:hover {
+      text-decoration: none; }
+      .page-content .photo-article .mr-main a:hover h3 {
+        color: #fff; }
+    .page-content .photo-article .mr-main a .overlay-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 10px 10px;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+      background: -webkit-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.65) 100%);
+      background: -o-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.65) 100%);
+      background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.65) 100%);
+      transition: .3s ease all; }
+  .page-content .photo-article .mr-main1 {
+    padding-top: 1em;
+    position: relative; }
+    .page-content .photo-article .mr-main1 img {
+      height: 198px;
+      width: 100%; }
+   .page-content .photo-article .mr-main1 a h3 {
+    color: #fff;
+    font-size: 1em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 3px 0;
+}
+    .page-content .photo-article .mr-main1 a:hover {
+      text-decoration: none; }
+      .page-content .photo-article .mr-main1 a:hover h3 {
+        color: #fff; }
+    .page-content .photo-article .mr-main1 a .overlay-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 10px 10px;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+      background: -webkit-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.65) 100%);
+      background: -o-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.65) 100%);
+      background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 25%, rgba(0, 0, 0, 0.65) 100%);
+      transition: .3s ease all; }
+  .page-content .photo-article .more-photos a {
+    color: #222222;
+    font-size: 0.8em;
+    font-family: "Roboto", sans-serif; }
+    .page-content .photo-article .more-photos a i {
+      font-size: 90%;
+      color: #333; }
+  .page-content .must-read h4 {
+    font-size: 17px;
+    color: #333;
+    padding-bottom: 5px; }
+  .page-content .must-read .mr-main img {
+    height: 130px;
+    width: 100%; }
+  .page-content .must-read .mr-main a h3 {
+    color: #000;
+    font-family: "Frank Ruhl Libre", serif;
+    font-weight: 600;
+    font-size: 1em;
+    margin: 3px 0; }
+  .page-content .must-read .mr-main a:hover {
+    text-decoration: none; }
+    .page-content .must-read .mr-main a:hover h3 {
+      color: #222222; }
+  .page-content .most-read {
+    padding:20px; }
+    
+  .page-content .youmay-article {
+    padding: 20px 0; }
+    .page-content .youmay-article .mr-main {
+      padding-top: 1em; 
+        padding:10px;
+      border-radius:7px;
+       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        
+    }
+      .page-content .youmay-article .mr-main img {
+        height: 200px;
+        width: 100%; }
+     .page-content .youmay-article .mr-main a h3 {
+    font-family: "Frank Ruhl Libre", serif;
+    color: #000;
+    font-size: 0.9em;
+    margin: 3px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+      .page-content .youmay-article .mr-main a:hover {
+        text-decoration: none; }
+        .page-content .youmay-article .mr-main a:hover h3 {
+          color: #222222; }
+  .page-content .new-eightbyfour {
+    padding: 30px 0; }
+    .page-content .new-eightbyfour .more-news {
+      padding: 40px 0; }
+      .page-content .new-eightbyfour .more-news .media {
+        padding: 20px 0;
+        border-bottom: 1px solid #c7c7c7; }
+        .page-content .new-eightbyfour .more-news .media img {
+          height: 65px; }
+        .page-content .new-eightbyfour .more-news .media .media-body h3 {
+          font-size: 14px;
+          font-family: "Frank Ruhl Libre", serif;
+          color: #333; }
+      .page-content .new-eightbyfour .more-news .more-view {
+        float: right; }
+        .page-content .new-eightbyfour .more-news .more-view a {
+          color: #333;
+          font-size: 0.8em;
+          font-family: "Roboto", sans-serif; }
+          .page-content .new-eightbyfour .more-news .more-view a i {
+            font-size: 90%;
+            color: #333; }
+          .page-content .new-eightbyfour .more-news .more-view a:hover {
+            color: #222222;
+            text-decoration: none; }
+   .page-content .new-eightbyfour .news-block .block-main h3 {
+    border-bottom: 1px solid #b3b3b3;
+    padding-bottom: 7px;
+    background: #e63401;
+    padding: 10px 20px;
+    border-radius: 10px 10px 0px 0px;
+}
+      .page-content .new-eightbyfour .news-block .block-main h3 a {
+        font-size: 15px;
+        display: block;
+        width: 100%;
+        color: #fff; }
+        .page-content .new-eightbyfour .news-block .block-main h3 a i {
+          background: #d1d1d1;
+          color: #333;
+          float: right;
+          display: inline-block;
+          padding: 2px 5px; }
+    .page-content .new-eightbyfour .news-block .block-main ul {
+    padding: 0 15px;
+    list-style: none;
+}
+      .page-content .new-eightbyfour .news-block .block-main ul li {
+        margin-bottom: 10px;
+        line-height: 17px; }
+        .page-content .new-eightbyfour .news-block .block-main ul li a {
+          font-family: "Frank Ruhl Libre", serif;
+          color: #333;
+          font-size: 14px; }
+          .page-content .new-eightbyfour .news-block .block-main ul li a:hover {
+            text-decoration: none; }
+  .page-content .google-ad {
+    padding: 1em 0; }
+  .page-content .sidebar-articles {
+    margin: 15px 0; }
+    .page-content .sidebar-articles h4 {
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0;
+      color: #222222;
+      position: relative;
+      font-family: "Frank Ruhl Libre", serif; }
+      .page-content .sidebar-articles h4:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        bottom: 20px;
+        height: 5px;
+        margin-top: -2px;
+        background: #e1e1e1; }
+      .page-content .sidebar-articles h4 span {
+        background: #fff;
+        z-index: 1;
+        position: relative;
+        padding: 3px 20px 7px 0px;
+        display: inline-block; }
+    .page-content .sidebar-articles .inner-sd-article > a h3 {
+    color: #000;
+    font-size: 1.3em;
+    margin: 5px 0;
+    font-family: "Frank Ruhl Libre", serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+    .page-content .sidebar-articles .inner-sd-article h4 {
+      background: #222222;
+      color: #fff;
+      padding: 3px;
+      font-family: "Frank Ruhl Libre", serif;
+      text-align: center;
+      font-size: 1.3em;
+      margin: 0; }
+    .page-content .sidebar-articles .inner-sd-article .bullet-list {
+      list-style: none;
+      margin: 10px 0 0 0;
+      padding: 0 0 0 15px; }
+      .page-content .sidebar-articles .inner-sd-article .bullet-list li {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: justify;
+        margin-right: 0; }
+        .page-content .sidebar-articles .inner-sd-article .bullet-list li:before {
+          content: '';
+          position: absolute;
+          top: 10px;
+          left: -15px;
+          width: 6px;
+          height: 6px;
+          background: #222222; }
+        .page-content .sidebar-articles .inner-sd-article .bullet-list li a {
+          color: #000;
+          font-family: "Frank Ruhl Libre", serif; }
+          .page-content .sidebar-articles .inner-sd-article .bullet-list li a:hover {
+            text-decoration: underline; }
+
+.breadcrumb-sec .breadcrumb-m {
+  float: right;
+  background: transparent; }
+  .breadcrumb-sec .breadcrumb-m ol {
+    background: transparent;
+    margin: 0;
+    font-family: "Nunito", sans-serif; }
+    .breadcrumb-sec .breadcrumb-m ol li a {
+      color: #333; }
+      .breadcrumb-sec .breadcrumb-m ol li a:hover {
+        text-decoration: none; }
+    .breadcrumb-sec .breadcrumb-m ol li.active {
+      font-weight: 400;
+      color: #000; }
+
+.showing-result {
+  padding: 10px 0 0 0;
+  border-bottom: 1px solid #a9a9a9;
+  font-family: "Roboto", sans-serif; }
+  .showing-result span {
+    font-size: 15px; }
+  .showing-result h4 {
+    font-size: 1.3em;
+    text-transform: uppercase; }
+
+.article-listing .media {
+  border-bottom: 1px solid #3333;
+  padding: 30px 0; }
+  .article-listing .media img {
+    height: 180px; }
+  .article-listing .media a .posted-on {
+    color: #333; }
+  .article-listing .media a p {
+    color: #333;
+    font-family: "Frank Ruhl Libre", serif; }
+  .article-listing .media a:hover {
+    text-decoration: none; }
+  .article-listing .media a h5 {
+    color: #000;
+    font-family: "Frank Ruhl Libre", serif;
+    font-weight: bold;
+    font-size: 1.6em; }
+  .article-listing .media .div-tags ul {
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+    .article-listing .media .div-tags ul li {
+      display: inline-block; }
+      .article-listing .media .div-tags ul li a,.article-listing .media .div-tags ul li .btn-link {
+        padding: 1px 4px;
+        border: 1px solid #615e5e;
+        text-transform:capitalize;
+        color: #615e5e;
+        font-family: "Frank Ruhl Libre", serif;
+        font-size: 13px; }
+        .article-listing .media .div-tags ul li a:hover, .article-listing .media .div-tags ul li .btn-link:hover {
+          text-decoration: none;
+          color: #000;
+          border-color: #000; }
+
+.paginate {
+  margin: 20px 0;
+  text-align: center; }
+  .paginate ul {
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+    .paginate ul li {
+      display: inline-block; }
+      .paginate ul li a {
+        color: #333; }
+        .paginate ul li a:focus, .paginate ul li a:hover {
+          color: #fff;
+          background: #333;
+          box-shadow: none;
+          outline: none; }
+
+.terms-of-use h3 {
+  font-family: "Frank Ruhl Libre", serif;
+  font-size: 1.8em;
+  margin-top: 2em;
+  font-weight: 600; }
+.terms-of-use p {
+  font-family: "Frank Ruhl Libre", serif;
+  text-align: justify;
+  letter-spacing: 1px;
+  font-size: 1.2em; }
+
+.about-us {
+  text-align: center;
+  padding: 40px 0; }
+  .about-us h3 {
+    font-size: 1.8em;
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    margin-top: 1em; }
+    .about-us h3:first-child {
+      margin-top: 0; }
+  .about-us p {
+    font-size: 1.1em;
+    font-family: "Frank Ruhl Libre", serif;
+    margin: 0; }
+
+.publishers-authors {
+  background: #f2f2f2;
+  padding: 3em 0; }
+  .publishers-authors .heading-pa {
+    text-align: center;
+    font-family: "Roboto", sans-serif; }
+  .publishers-authors .team-main {
+    margin-bottom: 20px;
+    position: relative; }
+    .publishers-authors .team-main .team-img img {
+      width: 100%;
+      height: 300px;
+      border-radius: 10px; }
+    .publishers-authors .team-main .team-con {
+      position: absolute;
+      bottom: 10px;
+      z-index: 1;
+      width: 100%;
+      text-align: center; }
+      .publishers-authors .team-main .team-con h3 {
+        color: #fff;
+        font-size: 20px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        margin: 0; }
+      .publishers-authors .team-main .team-con h4 {
+        margin: 0;
+        color: #fff;
+        font-family: "Nunito", sans-serif;
+        font-size: 14px; }
+    .publishers-authors .team-main:after {
+      content: " ";
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: -webkit-gradient(linear, left top, left bottom, from(rgba(18, 18, 19, 0)), to(rgba(18, 18, 19, 0.7)));
+      background: -webkit-linear-gradient(top, rgba(18, 18, 19, 0) 0%, rgba(18, 18, 19, 0.7) 100%);
+      background: -o-linear-gradient(top, rgba(18, 18, 19, 0) 0%, rgba(18, 18, 19, 0.7) 100%);
+      background: linear-gradient(180deg, rgba(18, 18, 19, 0) 0%, rgba(18, 18, 19, 0.7) 100%); }
+
+.contact-page-1 {
+  padding: 1em 0;
+  text-align: center;
+  font-family: "Poppins", sans-serif; }
+  .contact-page-1 img {
+    height: 400px;
+    margin-bottom: 2em; }
+
+.contact-page-2 {
+  background: #f2f2f2;
+  padding: 3em 0; }
+  .contact-page-2 .contact-form-block {
+    background: #fff;
+    padding: 5rem; }
+    .contact-page-2 .contact-form-block .contact-form-wrapper .text-control {
+      width: 100%;
+      display: block;
+      padding: 10px;
+      border: 2px solid #d3d7da;
+      font-family: "Poppins", sans-serif;
+      font-size: 14px; }
+    .contact-page-2 .contact-form-block .contact-form-wrapper .btn-primary {
+      background: #333;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 0;
+      font-size: 1.1em;
+      font-family: "Poppins", sans-serif;
+      letter-spacing: 1px; }
+      .contact-page-2 .contact-form-block .contact-form-wrapper .btn-primary:hover {
+        background: #000; }
+  .contact-page-2 .contact-info-wrapper .contact-info-inner {
+    background: #fff;
+    padding: 5rem; }
+    .contact-page-2 .contact-info-wrapper .contact-info-inner h2 {
+      font-family: "Poppins", sans-serif;
+      margin-bottom: 10px; }
+    .contact-page-2 .contact-info-wrapper .contact-info-inner p {
+      margin-bottom: 1em; }
+  .contact-page-2 .contact-info-wrapper .contact-info .address h3 {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600; }
+  .contact-page-2 .contact-info-wrapper .contact-info .call-contact .tel {
+    color: #333;
+    display: block;
+    padding: 5px 0px; }
+    .contact-page-2 .contact-info-wrapper .contact-info .call-contact .tel:hover {
+      text-decoration: none; }
+    .contact-page-2 .contact-info-wrapper .contact-info .call-contact .tel i {
+      padding-right: 5px; }
+  .contact-page-2 .contact-info-wrapper .contact-info .contact-social {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; }
+    .contact-page-2 .contact-info-wrapper .contact-info .contact-social .social-title {
+      font-weight: 500;
+      margin-bottom: 0;
+      margin-right: 2rem; }
+    .contact-page-2 .contact-info-wrapper .contact-info .contact-social .social-share {
+      padding: 0;
+      margin: 0;
+      list-style: none; }
+      .contact-page-2 .contact-info-wrapper .contact-info .contact-social .social-share li {
+        margin-right: 1rem;
+        display: inline-block; }
+        .contact-page-2 .contact-info-wrapper .contact-info .contact-social .social-share li a {
+          display: block;
+          width: 35px;
+          height: 35px;
+          background: #333;
+          border-radius: 100%;
+          font-size: 15px;
+          line-height: 35px;
+          color: #fff;
+          text-align: center; }
+          .contact-page-2 .contact-info-wrapper .contact-info .contact-social .social-share li a:hover {
+            background: #000; }
+
+.contact-location {
+  padding: 2em 0; }
+  .contact-location h3 {
+    font-family: "Poppins", sans-serif; }
+  .contact-location iframe {
+    height: 300px;
+    width: 100%; }
+
+.news-details .news-title {
+  font-size: 3em;
+  font-family: "Frank Ruhl Libre", serif;
+  text-transform: capitalize; }
+.news-details .news-slogan {
+  font-size: 17px;
+  font-family: "Roboto", sans-serif; }
+.news-details .news-det {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .news-details .news-det li {
+    border-right: 1px solid #c4c4c4;
+    padding: 0px 10px;
+    font-family: "Nunito", sans-serif;
+    color: #919191;
+    display: inline-block; }
+    .news-details .news-det li:first-child {
+      padding-left: 0; }
+    .news-details .news-det li:last-child {
+      border-right: none; }
+    .news-details .news-det li a {
+      color: #000; }
+.news-details .news-img {
+  margin: 20px 0; }
+  .news-details .news-img img {
+    width: 100%; }
+.news-details .news-content {
+  font-family: "Frank Ruhl Libre", serif; }
+  .news-details .news-content p {
+    font-size: 1.1em; }
+.news-details .div-tags ul {
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+  .news-details .div-tags ul li {
+    display: inline-block; }
+    .news-details .div-tags ul li a,.news-details .div-tags ul li .btn-link {
+      padding: 1px 4px;
+      border: 1px solid #615e5e;
+      text-transform:capitalize;
+      color: #615e5e;
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: 14px; }
+      .news-details .div-tags ul li a:hover,.news-details .div-tags ul li .btn-link:hover {
+        text-decoration: none;
+        color: #000;
+        border-color: #000; }
+.news-details .news-reply-comment {
+  margin: 2em 0; }
+  .news-details .news-reply-comment h3 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold; }
+  .news-details .news-reply-comment p {
+    font-family: "Open Sans", sans-serif; }
+  .news-details .news-reply-comment .comment-section-form {
+    margin: 1em 0; }
+    .news-details .news-reply-comment .comment-section-form .text-control {
+      padding: 10px;
+      width: 100%;
+      border: 2px solid #d7d7d7;
+      font-family: "Nunito", sans-serif; }
+      .news-details .news-reply-comment .comment-section-form .text-control:hover, .news-details .news-reply-comment .comment-section-form .text-control:focus {
+        box-shadow: none;
+        outline: none; }
+    .news-details .news-reply-comment .comment-section-form .btn-primary {
+      background: #333;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 0;
+      font-size: 1em;
+      font-family: "Poppins", sans-serif;
+      letter-spacing: 1px; }
+      .news-details .news-reply-comment .comment-section-form .btn-primary:hover {
+        background: #000; }
+.news-details .news-section-comments {
+  padding: 2em 0; }
+  .news-details .news-section-comments .media {
+    padding: 1em 0;
+    border-bottom: 1px solid #e3e3e3; }
+  .news-details .news-section-comments .comm-head {
+    border-bottom: 1px solid #f4f4f4;
+    padding-bottom: 5px; }
+  .news-details .news-section-comments .comm-h5 {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 700; }
+    .news-details .news-section-comments .comm-h5 .upda-time {
+      font-size: 65%;
+      font-weight: 400;
+      color: #333;
+      font-family: "Roboto", sans-serif; }
+  .news-details .news-section-comments p {
+    margin-bottom: 0px; }
+  .news-details .news-section-comments .reply-box {
+    color: #8b8b8b;
+    font-size: 14px; }
+    .news-details .news-section-comments .reply-box:hover {
+      text-decoration: none; }
+
+footer {
+    background: #333;
+    padding: 10px 0;
+}
+  footer .top-footer {
+    border-bottom: 1px solid #AAA; }
+    footer .top-footer .foo-socials ul {
+      padding: 0;
+      float: right;
+      margin: 0;
+      list-style: none; }
+      footer .top-footer .foo-socials ul li {
+        display: inline-block; }
+        footer .top-footer .foo-socials ul li a {
+          color: #fff;
+          display: inline-block;
+          padding: 5px 10px; }
+  footer .middle-footer {
+    padding: 2em 0; }
+    footer .middle-footer ul {
+      padding: 0 15px;
+      margin: 0;
+      border-right: 1px solid #999;
+      list-style: none; }
+      footer .middle-footer ul.no-border {
+        border: none; }
+      footer .middle-footer ul li.title {
+        color: #fff;
+        text-transform: capitalize; }
+      footer .middle-footer ul li a {
+        color: #fff;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 600;
+        font-size: 0.9em; }
+      footer .middle-footer ul li .foo-logo img {
+        height: 20px; }
+  footer .bottom-footer p {
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    color: #fff;
+    font-size: 0.9em; }
+  footer .bottom-footer a {
+    color: #fff;
+    padding: 0 10px; }
+    footer .bottom-footer a:hover {
+      color: #fff;
+      text-decoration: none; }
+footer .bottom-footer {
+    background: #e63401;
+}
+/*# sourceMappingURL=style.css.map */
+/* Loader Start */
+.loader .modal-content {
+  background: transparent;
+  border:0px;
+}
+.modal-dialog.loader {
+  position: absolute;
+  top: 30%;
+  left: 46%;
+  transform: translate(-50%,-50%);
+}
+.loader .modal-body img{
+width: 50px;
+}
+/* Loader End */
+.section-title {
+    position: relative;
+}
+.section-title .block_title {
+    font-size: 14px;
+    line-height: 100%;
+    text-transform: uppercase;
+    margin: 0 0 5px;
+    border-bottom: 1px solid #bcbcbc;
+}
+.section-title .block_title>span {
+    background: #e63401;
+    color: #fff;
+    padding: 10px 20px;
+    top: 1px;
+    display: inline-block;
+    border-radius: 4px 4px 0 0px;
+    position: relative;
+}
+.news-block .block-main {
+    background: #f8f8f8;
+    border-bottom: 2px solid #ec0000;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+.sidebar-articles .section-title-s {
+    position: relative;
+}
+.section-title-s .block_title {
+    font-size: 14px;
+    line-height: 100%;
+    text-transform: uppercase;
+    margin: 0 0 5px;
+    border-bottom: 1px solid #bcbcbc;
+}
+.section-title-s .block_title>span {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    top: 1px;
+    display: inline-block;
+    border-radius: 4px 4px 0 0px;
+    position: relative;
+}
+.breaking-news h3 {
+    background: #e63401;
+    color: #fff;
+    font-size: 14px;
+    padding: 2px 15px;
+    line-height: 22px;
+    margin: 0;
+}
+.breaking-news marquee {
+    padding-top: 4px;
+    line-height: 15px;
+}
+.breaking-news marquee .news-mar {
+    margin: 0;
+    margin-top:5px;
+}
+.breaking-news marquee .news-mar li {
+    display: inline-block;
+    color: #fff;
+}
+.breaking-news marquee .news-mar li a {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+.breaking-news marquee .news-mar li i {
+    font-size: 70%;
+    padding: 0 10px;
+}
+.breaking-news {
+    background: #333;
+}
+
+.team-section {
+    padding:3em 0;
+    background:#F8F8FB;
+}
+.team-section .team-main {
+    background: #fff;
+    padding: 10px;
+    box-shadow: 1px 1px 6px 2px #33333314;
+    border-radius: 6px;
+}
+
+.team-section .team-main .team-img {
+    text-align: center;
+}
+.team-section .team-main .team-contnt {
+    padding:10px;
+}
+.team-section .team-main .team-img img {
+    height: 200px;
+}
+
+.team-section .team-main .team-contnt h3 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 5px;
+    font-family: 'Nunito';
+    font-weight: 700;
+}
+.team-section .team-h {
+    font-size: 2em;
+    font-family: 'Poppins';
+    display: inline-block;
+    font-weight: 600;
+    border-bottom: 2px solid #EC0000;
+    margin-bottom: 1.5em;
+}
+.team-section .team-main .team-contnt h4 {
+    font-size: 15px;
+    text-align: center;
+    margin: 0;
+    color: #2a1c6f;
+}
+.subscribe-form {
+    background: #333;
+}
+
+.subscribe-form label {
+    color: #c8c8c8;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: 'Nunito';
+}
+
+
+.subscribe-form h3 {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-family: 'Poppins';
+}
+
+.subscribe-form input {
+    border-radius: 0;
+    font-family: 'Nunito';
+}
+
+.subscribe-form .btn-subscribe {
+    background: #000;
+    padding: 7px 9px;
+    color: #fff;
+    font-family: 'Poppins';
+    margin-top: 10px;
+}
+
+.subscribe-form .btn-subscribe:hover, .subscribe-form .btn-subscribe:focus {
+    color:#fff;
+    background:#fff;
+    outline:none;
+    box-shadow:none;
+}
+.page-content .sidebar-articles .inner-poll {
+    background: #f2f2f2;
+}
+
+.page-content .sidebar-articles .inner-poll h3 {
+    font-size: 16px;
+    color: #fff;
+    background:#ec0000;
+    padding:10px;
+}
+
+.page-content .sidebar-articles .inner-poll ul {
+    margin:0;
+    padding: 15px;
+    list-style: none;
+}
+.page-content .sidebar-articles .inner-poll ul li span {
+    z-index: 2;
+    position: absolute;
+    padding: 0 10px;
+    height: 100%;
+    font-weight: 500;
+}
+.page-content .sidebar-articles .inner-poll ul li div {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    z-index: 1;
+    background: #ff3f3fa6;
+}
+.page-content .sidebar-articles .inner-poll ul li {
+    padding: 5px 0;
+    position: relative;
+    background: #fff;
+    margin-bottom: 4px;
+    height: 35px;
+}
+.page-content .sidebar-articles .inner-poll ul li span:last-child {
+    float: right;
+    position: relative;
+    padding-right: 10px;
+}
+.page-content .sidebar-articles .btn-vote {
+    background: #333;
+    color: #fff;
+        margin-left: 10px;
+}
+.subscribe-form .btn-subscribe:hover, .subscribe-form .btn-subscribe:focus
+{
+    color: #000 !important;
+}
+
+.slider-section .carousel-inner img {
+    object-fit: cover !important;
+    height:450px !important;
+}
+@media (max-width: 768px) {
+    iframe {
+        width: 100%;
+        height: 237px;
+    }
+}
+.comment-section-form .commbox {
+    margin-top: 15px !important;
+}
