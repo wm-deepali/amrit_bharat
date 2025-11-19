@@ -16,14 +16,6 @@ class VideoController extends Controller
     // -----------------------------
     public function allVideos(Request $request)
     {
-        $user = Auth::user();
-        if (!isset($user) || empty($user) || $user->delete_status != '0') {
-            return response()->json([
-                'status' => false,
-                'message' => 'Your account is inactive. Contact your administrator to activate it.'
-            ], 401);
-        }
-
         $type = $request->type ?? 'published'; // default show only published
 
         $query = Video::query();

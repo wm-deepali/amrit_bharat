@@ -11,6 +11,7 @@ use App\Notifications\PushNotification;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\EventController;
 use App\http\Controllers\Api\VideoController;
+use App\http\Controllers\Api\BannerController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -68,6 +69,10 @@ Route::middleware('authSunctum')->group(function () {
     Route::get('post-details', [PostController::class, 'postDetails'])->middleware();
 });
 
+Route::get('/events', [EventController::class, 'index']); // All active events
+Route::get('/videos/all', [VideoController::class, 'allVideos']); // all published videos
+Route::get('/banners/all', [BannerController::class, 'allBanners']); // all published videos
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
@@ -117,7 +122,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('mark-all-read', [NewsController::class, 'markAllRead']);
 
     Route::prefix('events')->group(function () {
-        Route::get('/', [EventController::class, 'index']); // All active events
         Route::get('/my-events', [EventController::class, 'myEvents']); // Auth user's events
         Route::get('/{id}', [EventController::class, 'show']);
         Route::post('/', [EventController::class, 'store']);
@@ -126,7 +130,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     Route::prefix('videos')->group(function () {
-        Route::get('/all', [VideoController::class, 'allVideos']); // all published videos
         Route::get('/my', [VideoController::class, 'myVideos']);   // videos of auth user
         Route::get('/{id}', [VideoController::class, 'show']);
         Route::post('/', [VideoController::class, 'store']);
@@ -138,6 +141,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/', [HashtagController::class, 'index']); // list/search hashtags
     });
 
+    Route::prefix('banners')->group(function () {
+        Route::get('/my', [BannerController::class, 'myBanners']);   // videos of auth user
+        Route::get('/{id}', [BannerController::class, 'show']);
+        Route::post('/', [BannerController::class, 'store']);
+        Route::post('/update/{id}', [BannerController::class, 'update']);
+        Route::delete('/{id}', [BannerController::class, 'destroy']);
+    });
 });
 
 

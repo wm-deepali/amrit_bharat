@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\HashtagController;
+use App\Http\Controllers\BannerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -166,11 +167,24 @@ Route::prefix('manage-videos')->group(function () {
 
 
 
-Route::prefix('manage-hashtags')->middleware(['auth'])->group(function() {
+Route::prefix('manage-hashtags')->middleware(['auth'])->group(function () {
     Route::get('/', [HashtagController::class, 'index'])->name('manage-hashtags.index');
     Route::get('/create', [HashtagController::class, 'create'])->name('manage-hashtags.create');
     Route::post('/store', [HashtagController::class, 'store'])->name('manage-hashtags.store');
     Route::get('/edit/{id}', [HashtagController::class, 'edit'])->name('manage-hashtags.edit');
     Route::post('/update/{id}', [HashtagController::class, 'update'])->name('manage-hashtags.update');
     Route::delete('/destroy/{id}', [HashtagController::class, 'destroy'])->name('manage-hashtags.destroy');
+});
+
+
+// Banners & Offers routes
+Route::prefix('manage-banners')->middleware(['auth', 'can:is-admin'])->group(function () {
+    Route::get('/', [BannerController::class, 'index'])->name('manage-banners.index');
+    Route::get('/create', [BannerController::class, 'create'])->name('manage-banners.create');
+    Route::post('/store', [BannerController::class, 'store'])->name('manage-banners.store');
+    Route::get('/{id}/edit', [BannerController::class, 'edit'])->name('manage-banners.edit');
+    Route::post('/{id}/update', [BannerController::class, 'update'])->name('manage-banners.update');
+    Route::get('/view/{id}', [BannerController::class, 'show'])->name('manage-banners.view');
+    Route::delete('/{id}/delete', [BannerController::class, 'destroy'])->name('manage-banners.destroy');
+    Route::post('/{id}/status', [BannerController::class, 'updateStatus'])->name('manage-banners.status');
 });

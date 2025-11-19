@@ -16,38 +16,133 @@ class EventController extends Controller
     // --------------------------------------------
     public function index(Request $request)
     {
-        $user = Auth::user();
-        if (!isset($user) || empty($user) || $user->delete_status != '0') {
-            return response()->json([
-                'status' => false,
-                'message' => 'Your account is inactive. Contact your administrator to activate it.'
-            ], 401);
+        $user = auth()->user();
+        $cityId = $request->city_id ?? ($user->city_id ?? null);
+        $requestedCity = $request->city_id ? true : false; // check if query city
+        $stateId = null;
+
+        // Get city and state for fallback
+        if ($cityId) {
+            $city = \App\City::find($cityId);
+            $stateId = $city ? $city->state_id : null;
         }
 
-        $query = Event::with('user', 'city', 'state')
-            ->where('status', 'published'); // only active/published events
-
-        // Filter by city
-        if ($request->has('city_id') && !empty($request->city_id)) {
-            $query->where('city_id', $request->city_id);
+        if (!$cityId && $user) {
+            if ($user->city_id) {
+                $cityId = $user->city_id;
+                $stateId = $user->state_id;
+            } elseif ($user->state_id) {
+                $stateId = $user->state_id;
+            }
         }
 
-        // Search filter
-        if ($request->has('search') && !empty($request->search)) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%$search%")
-                    ->orWhere('short_content', 'like', "%$search%");
-            });
+        // Base query
+        $baseQuery = Event::with('user', 'city', 'state')
+            ->where('status', 'published');
+
+        /**
+         * 1️⃣ TRY CITY EVENTS
+         */
+        if ($cityId) {
+            $cityEvents = (clone $baseQuery)->where('city_id', $cityId)->latest()->get();
+
+            if ($cityEvents->count() > 0) {
+                return $this->finalResponse($request, $cityEvents);
+            }
+
+            // If cityId came from query param → show "no events" message
+            if ($requestedCity) {
+                // 2️⃣ TRY STATE EVENTS
+                if ($stateId) {
+                    $stateEvents = (clone $baseQuery)->where('state_id', $stateId)->latest()->get();
+
+                    if ($stateEvents->count() > 0) {
+                        return $this->fallbackResponse("No Events in Your City", "View Other Events", "state", $stateEvents, $request);
+                    }
+                }
+
+                // 3️⃣ FALLBACK → ALL INDIA EVENTS
+                $allIndia = (clone $baseQuery)->latest()->get();
+                return $this->fallbackResponse("No Events in Your City", "View Other Events", "india", $allIndia, $request);
+            }
         }
 
-        $events = $query->latest()->get();
+        /**
+         * No cityId came from Query → USER BASED LOGIC (NO message needed)
+         */
+        // User fallback (city → state → india)
+        if ($user) {
+
+            // state fallback
+            if ($stateId) {
+                $stateEvents = (clone $baseQuery)->where('state_id', $stateId)->latest()->get();
+
+                if ($stateEvents->count() > 0) {
+                    return $this->finalResponse($request, $stateEvents);
+                }
+            }
+
+            // All India
+            $allEvents = (clone $baseQuery)->latest()->get();
+            return $this->finalResponse($request, $allEvents);
+        }
+
+        /**
+         * No user, no city → return all India
+         */
+        $allEvents = (clone $baseQuery)->latest()->get();
+        return $this->finalResponse($request, $allEvents);
+    }
+
+
+    /**
+     * NORMAL RESPONSE (no messages)
+     */
+    private function finalResponse($request, $events)
+    {
+        $events = $this->applySearch($request, $events);
 
         return response()->json([
             'status' => true,
             'data' => $events
         ]);
     }
+
+
+    /**
+     * FALLBACK RESPONSE WITH MESSAGE
+     */
+    private function fallbackResponse($message, $label, $type, $events, $request)
+    {
+        $events = $this->applySearch($request, $events);
+
+        return response()->json([
+            'status' => true,
+            'message' => $message,          // "No Events in Your City"
+            'fallback_label' => $label,     // "View Other Events"
+            'data_type' => $type,           // "state" or "india"
+            'data' => $events
+        ]);
+    }
+
+
+    /**
+     * SEARCH FILTER
+     */
+    private function applySearch($request, $events)
+    {
+        if ($request->filled('search')) {
+            $search = strtolower($request->search);
+
+            $events = $events->filter(function ($event) use ($search) {
+                return str_contains(strtolower($event->title), $search)
+                    || str_contains(strtolower($event->short_content), $search);
+            })->values();
+        }
+
+        return $events;
+    }
+
 
     public function myEvents()
     {
@@ -170,8 +265,8 @@ class EventController extends Controller
         if (!$defaultImage && count($imageNames) > 0) {
             $defaultImage = $imageNames[0];
         }
-        
-      
+
+
         $event = new Event();
         $event->user_id = Auth::id() ?? 0; // if API has auth, otherwise 0
         $event->title = $request->title;
