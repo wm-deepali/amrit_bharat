@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\HashtagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\NewsController;
 use App\Notifications\PushNotification;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Api\EventController;
+use App\http\Controllers\Api\VideoController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -107,12 +109,35 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user-news-profile', [NewsController::class, 'userNewsProfile']);
     Route::get('get-all-comments', [NewsController::class, 'getallcomments']);
     Route::post('delete-news', [NewsController::class, 'deleteNews']);
-    
+
     Route::get('user-notifications', [NewsController::class, 'getNotifications']);
     Route::get('count-notifications', [NewsController::class, 'getunReadNotificationsCount']);
     Route::get('delete-all-notifications', [NewsController::class, 'deleteAllNotifications']);
     Route::post('mark-read', [NewsController::class, 'markRead']);
     Route::get('mark-all-read', [NewsController::class, 'markAllRead']);
+
+    Route::prefix('events')->group(function () {
+        Route::get('/', [EventController::class, 'index']); // All active events
+        Route::get('/my-events', [EventController::class, 'myEvents']); // Auth user's events
+        Route::get('/{id}', [EventController::class, 'show']);
+        Route::post('/', [EventController::class, 'store']);
+        Route::post('/update/{id}', [EventController::class, 'update']);
+        Route::delete('/{id}', [EventController::class, 'destroy']);
+    });
+
+    Route::prefix('videos')->group(function () {
+        Route::get('/all', [VideoController::class, 'allVideos']); // all published videos
+        Route::get('/my', [VideoController::class, 'myVideos']);   // videos of auth user
+        Route::get('/{id}', [VideoController::class, 'show']);
+        Route::post('/', [VideoController::class, 'store']);
+        Route::post('/update/{id}', [VideoController::class, 'update']);
+        Route::delete('/{id}', [VideoController::class, 'destroy']);
+    });
+
+    Route::prefix('hashtags')->group(function () {
+        Route::get('/', [HashtagController::class, 'index']); // list/search hashtags
+    });
+
 });
 
 
