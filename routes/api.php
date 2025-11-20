@@ -141,13 +141,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/', [HashtagController::class, 'index']); // list/search hashtags
     });
 
-    Route::prefix('banners')->group(function () {
-        Route::get('/my', [BannerController::class, 'myBanners']);   // videos of auth user
-        Route::get('/{id}', [BannerController::class, 'show']);
-        Route::post('/', [BannerController::class, 'store']);
-        Route::post('/update/{id}', [BannerController::class, 'update']);
-        Route::delete('/{id}', [BannerController::class, 'destroy']);
-    });
 });
 
 

@@ -356,7 +356,7 @@ class EventController extends Controller
         $event->city_id = $request->city_id;
         $event->type = $request->type;
         $event->price = $request->type == "paid" ? $request->price : null;
-        $event->status = $request->status;
+        $event->status = 'pending';
 
         $event->save();
 

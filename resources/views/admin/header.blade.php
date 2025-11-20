@@ -138,16 +138,6 @@
                                             Hashtags</a>
                                     </div>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBanners" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Banners & Offers
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownBanners">
-                                        <a class="dropdown-item" href="{{ route('manage-banners.index') }}">Manage
-                                            Banners & offers </a>
-                                    </div>
-                                </li>
                             @endcan
 
                             @if(Auth::user()->role != 'admin')
@@ -217,6 +207,8 @@
                                         Content
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('manage-banners.index') }}">Manage
+                                            Banners </a>
                                         <a class="dropdown-item" href="{{ route('manage-epaper.index') }}">Manage
                                             E-paper</a>
                                         <a class="dropdown-item" href="{{ route('manage-team-category.index') }}">Manage

@@ -92,8 +92,8 @@
                         <button class="btn btn-warning btn-block update-status mt-2" data-id="{{ $banner->id }}"
                             data-status="pending">Mark Pending</button>
 
-                        <button class="btn btn-danger btn-block update-status mt-2" data-id="{{ $banner->id }}"
-                            data-status="rejected">Reject</button>
+                        <!-- <button class="btn btn-danger btn-block update-status mt-2" data-id="{{ $banner->id }}"
+                            data-status="rejected">Reject</button> -->
 
                         <hr>
 

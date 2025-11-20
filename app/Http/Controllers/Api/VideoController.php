@@ -193,13 +193,14 @@ class VideoController extends Controller
                 'data' => $validator->errors()
             ], 422);
         }
-        
+
         $video->title = $request->title;
         $video->slug = $request->slug ?? Str::slug($request->title);
         $video->short_description = $request->short_description;
         $video->youtube_link = $request->youtube_link;
         $video->detail_content = $request->detail_content;
-        $video->status = $request->status;
+        $video->status = 'pending';
+
         $video->save();
 
         return response()->json([

@@ -75,7 +75,7 @@
                             <select name="status" id="status" class="text-control">
                                 <option value="pending" {{ $banner->status == 'pending' ? 'selected' : '' }}>Pending</option>
                                 <option value="published" {{ $banner->status == 'published' ? 'selected' : '' }}>Published</option>
-                                <option value="rejected" {{ $banner->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                <!-- <option value="rejected" {{ $banner->status == 'rejected' ? 'selected' : '' }}>Rejected</option> -->
                             </select>
                             <div class="text-danger" id="status-err"></div>
                         </div>
