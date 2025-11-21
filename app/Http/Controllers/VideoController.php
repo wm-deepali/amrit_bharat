@@ -48,7 +48,7 @@ class VideoController extends Controller
             ], 422);
         }
 
-        Video::create([
+        $video = Video::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
             'slug' => $request->slug,
@@ -56,9 +56,11 @@ class VideoController extends Controller
             'youtube_link' => $request->youtube_link,
             'detail_content' => $request->detail_content,
             'status' => $request->status,
+            'published_at' => $request->status === 'published' ? now() : null,
+            'views' => 0, // initialize views
         ]);
 
-        return response()->json(['msg' => 'Video Added Successfully']);
+        return response()->json(['msg' => 'Video Added Successfully', 'data' => $video]);
     }
 
     public function edit($id)
@@ -86,17 +88,22 @@ class VideoController extends Controller
 
         $video = Video::findOrFail($id);
 
-        // Update only relevant fields
         $video->title = $request->title;
         $video->slug = $request->slug ?? \Str::slug($request->title);
         $video->short_description = $request->short_description;
         $video->youtube_link = $request->youtube_link;
         $video->detail_content = $request->detail_content;
+
+        // Update published_at if status is changed to published
+        if ($request->status === 'published') {
+            $video->published_at = now();
+        }
+
         $video->status = $request->status;
 
         $video->save();
 
-        return response()->json(['msg' => 'Video Updated Successfully']);
+        return response()->json(['msg' => 'Video Updated Successfully', 'data' => $video]);
     }
 
     public function show($id)
@@ -107,9 +114,17 @@ class VideoController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        Video::where('id', $id)->update(['status' => $request->status]);
+        $video = Video::findOrFail($id);
+        $video->status = $request->status;
 
-        return response()->json(['msg' => 'Status Updated']);
+        // Set published_at if status is published
+        if ($request->status === 'published' && !$video->published_at) {
+            $video->published_at = now();
+        }
+
+        $video->save();
+
+        return response()->json(['msg' => 'Status Updated', 'data' => $video]);
     }
 
     public function destroy($id)
@@ -118,4 +133,3 @@ class VideoController extends Controller
         return response()->json(['msg' => 'Video Deleted']);
     }
 }
-

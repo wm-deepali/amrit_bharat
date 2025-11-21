@@ -10,8 +10,8 @@ use App\Http\Controllers\Api\NewsController;
 use App\Notifications\PushNotification;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\EventController;
-use App\http\Controllers\Api\VideoController;
-use App\http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\VideoController;
+use App\Http\Controllers\Api\BannerController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -55,6 +55,11 @@ Route::get('guest/daily-picks', [PostController::class, 'getDailyPostGuest']);
 Route::get('guest/recent-news', [PostController::class, 'getRecentPostGuest']);
 Route::get('guest/related-news', [PostController::class, 'getRelatedPostGuest']);
 
+Route::get('events', [EventController::class, 'index']); 
+Route::get('event-categories', [EventController::class, 'getCategories']);
+Route::get('videos/all', [VideoController::class, 'allVideos']); // all published videos
+Route::get('banners/all', [BannerController::class, 'allBanners']); // all published videos
+
 
 Route::middleware('authSunctum')->group(function () {
     Route::get('get-daily-picks', [PostController::class, 'getDailyPost'])->middleware();
@@ -68,11 +73,6 @@ Route::middleware('authSunctum')->group(function () {
     Route::get('search-posts', [PostController::class, 'search'])->middleware();
     Route::get('post-details', [PostController::class, 'postDetails'])->middleware();
 });
-
-Route::get('/events', [EventController::class, 'index']); // All active events
-Route::get('/videos/all', [VideoController::class, 'allVideos']); // all published videos
-Route::get('/banners/all', [BannerController::class, 'allBanners']); // all published videos
-
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
 

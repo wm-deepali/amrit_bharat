@@ -113,7 +113,17 @@
                                         Events
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownEvents">
-                                        <a class="dropdown-item" href="{{ route('manage-events.index') }}">Manage Events</a>
+
+                                        <!-- Add Event Category -->
+                                        <a class="dropdown-item" href="{{ route('event-categories.index') }}">
+                                            Manage Event Category
+                                        </a>
+
+                                        <!-- Existing Manage Events -->
+                                        <a class="dropdown-item" href="{{ route('manage-events.index') }}">
+                                            Manage Events
+                                        </a>
+
                                     </div>
                                 </li>
 

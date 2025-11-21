@@ -145,7 +145,7 @@
             return;
 
         $.ajax({
-            url: "/manage-videos/" + id,
+            url: "/manage-videos/delete/" + id,
             type: "DELETE",
             data: { _token: "{{ csrf_token() }}" },
             success: function (res) {

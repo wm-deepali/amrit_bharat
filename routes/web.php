@@ -7,6 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\HashtagController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\EventCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -188,3 +189,14 @@ Route::prefix('manage-banners')->middleware(['auth', 'can:is-admin'])->group(fun
     Route::delete('/{id}/delete', [BannerController::class, 'destroy'])->name('manage-banners.destroy');
     Route::post('/{id}/status', [BannerController::class, 'updateStatus'])->name('manage-banners.status');
 });
+
+Route::prefix('event-categories')->middleware(['auth', 'can:is-admin'])->group(function () {
+    Route::get('/', [EventCategoryController::class, 'index'])->name('event-categories.index');
+    Route::get('/create', [EventCategoryController::class, 'create'])->name('event-categories.create');
+    Route::post('/store', [EventCategoryController::class, 'store'])->name('event-categories.store');
+    Route::get('/{id}/edit', [EventCategoryController::class, 'edit'])->name('event-categories.edit');
+    Route::post('/{id}/update', [EventCategoryController::class, 'update'])->name('event-categories.update');
+    Route::delete('/destroy/{id}', [EventCategoryController::class, 'destroy'])->name('event-categories.destroy');
+    Route::post('/{id}/status', [EventCategoryController::class, 'updateStatus'])->name('event-categories.status');
+});
+

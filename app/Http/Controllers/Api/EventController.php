@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\EventCategory;
 
 class EventController extends Controller
 {
@@ -92,6 +93,21 @@ class EventController extends Controller
          */
         $allEvents = (clone $baseQuery)->latest()->get();
         return $this->finalResponse($request, $allEvents);
+    }
+
+
+
+    public function getCategories()
+    {
+        $categories = EventCategory::where('status', 'active')
+            ->orderBy('name', 'ASC')
+            ->get(['id', 'name', 'slug', 'status', 'created_at']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Event categories fetched successfully',
+            'data' => $categories
+        ]);
     }
 
 
@@ -212,7 +228,7 @@ class EventController extends Controller
             ], 401);
         }
 
-
+        // Validation (category_id must accept "other")
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'short_content' => 'required|string|max:140',
@@ -222,6 +238,8 @@ class EventController extends Controller
             'venue' => 'required|string|max:255',
             'state_id' => 'required|exists:states,id',
             'city_id' => 'required|exists:cities,id',
+            'category_id' => 'required',  // removed exists rule because it can be "other"
+            'new_category' => 'required_if:category_id,other|string|max:255',
             'type' => 'required|in:free,paid',
             'price' => 'nullable|numeric|min:0',
             'status' => 'required|in:pending,published',
@@ -237,7 +255,28 @@ class EventController extends Controller
             ], 422);
         }
 
-        // Slug
+        // -----------------------------------------
+        // 1️⃣ CREATE NEW CATEGORY IF SELECTED "OTHER"
+        // -----------------------------------------
+        if ($request->category_id === "other") {
+
+            // create the category
+            $cat = new EventCategory();
+            $cat->name = $request->new_category;
+            $cat->slug = Str::slug($request->new_category);
+            $cat->status = 'active';
+            $cat->save();
+
+            // replace category_id with new ID
+            $categoryId = $cat->id;
+        } else {
+            // existing category
+            $categoryId = $request->category_id;
+        }
+
+        // -----------------------------------------
+        // 2️⃣ GENERATE UNIQUE SLUG
+        // -----------------------------------------
         $slug = $request->slug ?: Str::slug($request->title);
         $originalSlug = $slug;
         $counter = 1;
@@ -245,7 +284,10 @@ class EventController extends Controller
         while (Event::where('slug', $slug)->exists()) {
             $slug = $originalSlug . '-' . $counter++;
         }
-        // Upload images
+
+        // -----------------------------------------
+        // 3️⃣ UPLOAD IMAGES
+        // -----------------------------------------
         $imageNames = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
@@ -254,6 +296,7 @@ class EventController extends Controller
                 $imageNames[] = $filename;
             }
         }
+
         // Default image
         $defaultImage = null;
         if (!empty($imageNames) && $request->default_image !== null) {
@@ -266,9 +309,11 @@ class EventController extends Controller
             $defaultImage = $imageNames[0];
         }
 
-
+        // -----------------------------------------
+        // 4️⃣ SAVE EVENT
+        // -----------------------------------------
         $event = new Event();
-        $event->user_id = Auth::id() ?? 0; // if API has auth, otherwise 0
+        $event->user_id = Auth::id();
         $event->title = $request->title;
         $event->slug = $slug;
         $event->short_content = $request->short_content;
@@ -278,6 +323,7 @@ class EventController extends Controller
         $event->venue = $request->venue;
         $event->state_id = $request->state_id;
         $event->city_id = $request->city_id;
+        $event->category_id = $categoryId;   // updated category ID
         $event->type = $request->type;
         $event->price = $request->type == "paid" ? $request->price : null;
         $event->status = $request->status;
@@ -291,6 +337,7 @@ class EventController extends Controller
             'data' => $event
         ]);
     }
+
 
     // --------------------------------------------
     // UPDATE EVENT
@@ -314,7 +361,7 @@ class EventController extends Controller
             ], 404);
         }
 
-        // Check if this event belongs to the logged-in user
+        // Check if this event belongs to current user
         if ($event->user_id != $user->id) {
             return response()->json([
                 'status' => false,
@@ -322,6 +369,9 @@ class EventController extends Controller
             ], 403);
         }
 
+        // ------------------------------
+        // VALIDATION
+        // ------------------------------
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:events,slug,' . $event->id,
@@ -332,6 +382,11 @@ class EventController extends Controller
             'venue' => 'required|string|max:255',
             'state_id' => 'required|exists:states,id',
             'city_id' => 'required|exists:cities,id',
+
+            // category validation
+            'category_id' => 'required',
+            'new_category' => 'required_if:category_id,other|max:255',
+
             'type' => 'required|in:free,paid',
             'price' => 'nullable|numeric|min:0',
             'status' => 'required|in:pending,published,rejected',
@@ -345,6 +400,26 @@ class EventController extends Controller
             ], 422);
         }
 
+        // -----------------------------------------------------
+        // IF USER SELECTED "OTHER" → CREATE NEW CATEGORY
+        // -----------------------------------------------------
+        if ($request->category_id === "other") {
+
+            $newCat = EventCategory::create([
+                'name' => $request->new_category,
+                'slug' => Str::slug($request->new_category),
+                'status' => 'active'
+            ]);
+
+            $finalCategoryId = $newCat->id;
+
+        } else {
+            $finalCategoryId = $request->category_id;
+        }
+
+        // ------------------------------
+        // UPDATE EVENT
+        // ------------------------------
         $event->title = $request->title;
         $event->slug = $request->slug;
         $event->short_content = $request->short_content;
@@ -354,9 +429,13 @@ class EventController extends Controller
         $event->venue = $request->venue;
         $event->state_id = $request->state_id;
         $event->city_id = $request->city_id;
+        $event->category_id = $finalCategoryId; // ← SET FINAL CATEGORY
+
         $event->type = $request->type;
         $event->price = $request->type == "paid" ? $request->price : null;
-        $event->status = 'pending';
+
+        // Always make status pending after update
+        $event->status = "pending";
 
         $event->save();
 
@@ -366,6 +445,7 @@ class EventController extends Controller
             'data' => $event
         ]);
     }
+
 
 
     // --------------------------------------------

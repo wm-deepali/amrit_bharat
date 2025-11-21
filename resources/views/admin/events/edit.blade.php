@@ -82,6 +82,20 @@
 
                                 <h4 class="form-section-h">Event Details</h4>
 
+                                <!-- Event Category -->
+                                <div class="form-group">
+                                    <label>Event Category</label>
+                                    <select name="category_id" id="category_id" class="text-control">
+                                        <option value="">Select Category</option>
+                                        @foreach($categories as $cat)
+                                            <option value="{{ $cat->id }}" {{ old('category_id', $event->category_id) == $cat->id ? 'selected' : '' }}>
+                                                {{ $cat->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="text-danger" id="category_id-err"></div>
+                                </div>
+
                                 <!-- Title -->
                                 <div class="form-group">
                                     <label>Event Title</label>
@@ -230,7 +244,7 @@
 
 <script>
     // Data from backend
-   let oldImagesFromServer = @json(json_decode($event->images, true) ?? []);
+    let oldImagesFromServer = @json(json_decode($event->images, true) ?? []);
 
     let existingDefaultImage = @json($event->default_image ?? null);
     let allCities = @json($cities);

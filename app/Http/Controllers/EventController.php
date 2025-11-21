@@ -40,9 +40,11 @@ class EventController extends Controller
     {
         $states = State::select('id', 'name')->get();
         $cities = City::select('id', 'state_id', 'name')->get();
+        $categories = \App\EventCategory::select('id', 'name')->where('status', 'active')->get();
 
-        return view('admin.events.create', compact('states', 'cities'));
+        return view('admin.events.create', compact('states', 'cities', 'categories'));
     }
+
 
     /* ----------------------------------------------------------------------
      | STORE NEW EVENT
@@ -59,12 +61,14 @@ class EventController extends Controller
                 'venue' => 'required|string|max:255',
                 'state_id' => 'required|exists:states,id',
                 'city_id' => 'required|exists:cities,id',
+                'category_id' => 'required|exists:event_categories,id',
                 'type' => 'required|in:free,paid',
                 'price' => 'nullable|numeric|min:0',
                 'status' => 'required|in:pending,published',
                 'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
                 'default_image' => 'nullable|numeric',
             ]);
+
 
             if ($validator->fails()) {
                 return response()->json([
@@ -118,6 +122,7 @@ class EventController extends Controller
             $event->venue = $request->venue;
             $event->state_id = $request->state_id;
             $event->city_id = $request->city_id;
+            $event->category_id = $request->category_id;
             $event->type = $request->type;
             $event->price = $request->type == "paid" ? $request->price : null;
             $event->status = $request->status;
@@ -160,8 +165,11 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         $states = State::select('id', 'name')->get();
         $cities = City::select('id', 'state_id', 'name')->get();
-        return view('admin.events.edit', compact('event', 'states', 'cities'));
+        $categories = \App\EventCategory::select('id', 'name')->get();
+
+        return view('admin.events.edit', compact('event', 'states', 'cities', 'categories'));
     }
+
 
     /* ----------------------------------------------------------------------
      | UPDATE EVENT
@@ -189,7 +197,8 @@ class EventController extends Controller
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'removed_images' => 'array',
             'removed_images.*' => 'string',
-            'default_image' => 'nullable|string'
+            'default_image' => 'nullable|string',
+            'category_id' => 'required|exists:event_categories,id',
         ]);
 
         if ($validator->fails()) {
@@ -279,6 +288,7 @@ class EventController extends Controller
         $event->type = $request->type;
         $event->price = $request->type == "paid" ? $request->price : null;
         $event->status = $request->status;
+        $event->category_id = $request->category_id;
 
         $event->images = json_encode($finalImages);
         $event->default_image = $defaultImage;
@@ -320,7 +330,6 @@ class EventController extends Controller
         }
 
         $event->delete();
-
-        return redirect()->back()->with('success', 'Event deleted successfully');
+        return response()->json(['msgText' => 'Event deleted successfully']);
     }
 }

@@ -63,6 +63,18 @@
 
                                 <h4 class="form-section-h">Event Details</h4>
 
+                                <!-- Event Category -->
+                                <div class="form-group">
+                                    <label>Event Category</label>
+                                    <select name="category_id" id="category_id" class="text-control">
+                                        <option value="">Select Category</option>
+                                        @foreach($categories as $cat)
+                                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="text-danger" id="category_id-err"></div>
+                                </div>
+
                                 <!-- Title -->
                                 <div class="form-group">
                                     <label>Event Title</label>
@@ -76,6 +88,7 @@
                                     <input type="text" class="text-control" name="slug" id="slug">
                                     <div class="text-danger" id="slug-err"></div>
                                 </div>
+                            
 
                                 <!-- Short Content -->
                                 <div class="form-group">

@@ -86,7 +86,7 @@ $(document).on('click', '.delete-hashtag', function() {
 
     let id = $(this).data('id');
     $.ajax({
-        url: "{{ url('manage-hashtags') }}/" + id,
+        url: "{{ url('manage-hashtags/destroy') }}/" + id,
         type: 'DELETE',
         data: { _token: "{{ csrf_token() }}" },
         success: function(res){

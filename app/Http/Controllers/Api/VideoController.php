@@ -62,7 +62,6 @@ class VideoController extends Controller
             $query->where('status', $type);
         }
 
-        // Search filter
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -79,14 +78,12 @@ class VideoController extends Controller
         ]);
     }
 
-
-    // -----------------------------
     // VIEW SINGLE VIDEO
-    // -----------------------------
+// -----------------------------
     public function show($id)
     {
         $user = Auth::user();
-        if (!isset($user) || empty($user) || $user->delete_status != '0') {
+        if (!$user || $user->delete_status != '0') {
             return response()->json([
                 'status' => false,
                 'message' => 'Your account is inactive. Contact your administrator to activate it.'
@@ -102,11 +99,15 @@ class VideoController extends Controller
             ], 404);
         }
 
+        // Increment views
+        $video->increment('views');
+
         return response()->json([
             'status' => true,
             'data' => $video
         ]);
     }
+
 
     // -----------------------------
     // CREATE VIDEO
@@ -146,6 +147,8 @@ class VideoController extends Controller
         $video->youtube_link = $request->youtube_link;
         $video->detail_content = $request->detail_content;
         $video->status = $request->status;
+        $video->views = 0;
+        $video->published_at = $request->status === 'published' ? now() : null;
         $video->save();
 
         return response()->json([
@@ -173,7 +176,7 @@ class VideoController extends Controller
         if (!$video || $video->user_id != $user->id) {
             return response()->json([
                 'status' => false,
-                'message' => 'You are not authorized to update this event'
+                'message' => 'You are not authorized to update this video'
             ], 404);
         }
 
@@ -199,6 +202,12 @@ class VideoController extends Controller
         $video->short_description = $request->short_description;
         $video->youtube_link = $request->youtube_link;
         $video->detail_content = $request->detail_content;
+
+        // Update published_at if status changes to published
+        if ($request->status === 'published') {
+            $video->published_at = now();
+        }
+
         $video->status = 'pending';
 
         $video->save();
@@ -216,7 +225,7 @@ class VideoController extends Controller
     public function destroy($id)
     {
         $user = Auth::user();
-        if (!isset($user) || empty($user) || $user->delete_status != '0') {
+        if (!$user || $user->delete_status != '0') {
             return response()->json([
                 'status' => false,
                 'message' => 'Your account is inactive. Contact your administrator to activate it.'
@@ -228,7 +237,7 @@ class VideoController extends Controller
         if (!$video || $video->user_id != $user->id) {
             return response()->json([
                 'status' => false,
-                'message' => 'You are not authorized to update this event'
+                'message' => 'You are not authorized to delete this video'
             ], 404);
         }
 
