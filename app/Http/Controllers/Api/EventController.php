@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Event;
+use App\EventBookmarkLike;
+use App\EventView;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -196,7 +199,6 @@ class EventController extends Controller
             ], 401);
         }
 
-
         $event = Event::with('user', 'city', 'state')->find($id);
 
         if (!$event) {
@@ -208,9 +210,28 @@ class EventController extends Controller
 
         $event->images = json_decode($event->images, true) ?? [];
 
+        // -------------------------
+        // Track unique view per IP per day
+        // -------------------------
+        $ip = request()->ip();
+        $today = Carbon::today();
+
+        $exists = EventView::where('event_id', $event->id)
+            ->where('ip_address', $ip)
+            ->whereDate('created_at', $today)
+            ->exists();
+
+        if (!$exists) {
+            EventView::create([
+                'event_id' => $event->id,
+                'user_id' => $user ? $user->id : null,
+                'ip_address' => $ip
+            ]);
+        }
+
         return response()->json([
             'status' => true,
-            'data' => $event
+            'data' => $event,
         ]);
     }
 
@@ -491,6 +512,112 @@ class EventController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Event deleted successfully'
+        ]);
+    }
+
+    // --------------------------------------------
+    // ADD LIKE
+    // --------------------------------------------
+    public function addLike(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'event_id' => 'required|exists:events,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid Event Request',
+                'data' => $validator->errors()
+            ], 401);
+        }
+
+        $user = Auth::user();
+        if (!$user || $user->delete_status != '0') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Your account is inactive. Contact your administrator to activate it',
+            ], 401);
+        }
+
+        $event = Event::find($request->event_id);
+        if (!$event) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Event not found'
+            ], 404);
+        }
+
+        // Increment likes if not already liked
+        $existLike = EventBookmarkLike::where('user_id', $user->id)
+            ->where('event_id', $event->id)
+            ->first();
+
+        if (!$existLike) {
+            EventBookmarkLike::create([
+                'user_id' => $user->id,
+                'event_id' => $event->id,
+                'likes' => 1,
+            ]);
+        } else {
+            // If previously unliked, set likes to 1
+            if ($existLike->likes == 0) {
+                $existLike->update(['likes' => 1]);
+            }
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Like added successfully.',
+            'data' => []
+        ]);
+    }
+
+    // --------------------------------------------
+    // REMOVE LIKE
+    // --------------------------------------------
+    public function removeLike(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'event_id' => 'required|exists:events,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid Event Request',
+                'data' => $validator->errors()
+            ], 401);
+        }
+
+        $user = Auth::user();
+        if (!$user || $user->delete_status != '0') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Your account is inactive. Contact your administrator to activate it',
+            ], 401);
+        }
+
+        $event = Event::find($request->event_id);
+        if (!$event) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Event not found'
+            ], 404);
+        }
+
+        $existLike = EventBookmarkLike::where('user_id', $user->id)
+            ->where('event_id', $event->id)
+            ->first();
+
+        if ($existLike && $existLike->likes == 1) {
+            $existLike->update(['likes' => 0]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Like removed successfully.',
+            'data' => []
         ]);
     }
 

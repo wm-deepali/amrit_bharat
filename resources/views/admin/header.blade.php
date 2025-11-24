@@ -135,8 +135,11 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownVideos">
                                         <a class="dropdown-item" href="{{ route('manage-videos.index') }}">Manage
                                             Video's</a>
+                                        <a class="dropdown-item" href="{{ route('manage-video-comments.index') }}">Manage
+                                            Video Comments</a>
                                     </div>
                                 </li>
+
 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownHashtags" role="button"

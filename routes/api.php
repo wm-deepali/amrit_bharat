@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\VideoCommentController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -55,7 +56,7 @@ Route::get('guest/daily-picks', [PostController::class, 'getDailyPostGuest']);
 Route::get('guest/recent-news', [PostController::class, 'getRecentPostGuest']);
 Route::get('guest/related-news', [PostController::class, 'getRelatedPostGuest']);
 
-Route::get('events', [EventController::class, 'index']); 
+Route::get('events', [EventController::class, 'index']);
 Route::get('event-categories', [EventController::class, 'getCategories']);
 Route::get('videos/all', [VideoController::class, 'allVideos']); // all published videos
 Route::get('banners/all', [BannerController::class, 'allBanners']); // all published videos
@@ -127,7 +128,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/', [EventController::class, 'store']);
         Route::post('/update/{id}', [EventController::class, 'update']);
         Route::delete('/{id}', [EventController::class, 'destroy']);
+
+        // Like routes for events
+        Route::post('/add-like', [EventController::class, 'addLike']);
+        Route::post('/remove-like', [EventController::class, 'removeLike']);
     });
+
 
     Route::prefix('videos')->group(function () {
         Route::get('/my', [VideoController::class, 'myVideos']);   // videos of auth user
@@ -135,7 +141,21 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/', [VideoController::class, 'store']);
         Route::post('/update/{id}', [VideoController::class, 'update']);
         Route::delete('/{id}', [VideoController::class, 'destroy']);
+
+        // Video like routes
+        Route::post('/add-like', [VideoController::class, 'addLike']);
+        Route::post('/remove-like', [VideoController::class, 'removeLike']);
+
+        // Comment routes
+        Route::post('/comment/add', [VideoCommentController::class, 'addComment']);
+        Route::post('/comment/edit', [VideoCommentController::class, 'editComment']);
+        Route::delete('/comment/delete', [VideoCommentController::class, 'deleteComment']);
+
+        // Like / dislike routes on comments
+        Route::post('/comment/add-like', [VideoCommentController::class, 'addLike']);
+        Route::post('/comment/remove-like', [VideoCommentController::class, 'removeLike']);
     });
+
 
     Route::prefix('hashtags')->group(function () {
         Route::get('/', [HashtagController::class, 'index']); // list/search hashtags

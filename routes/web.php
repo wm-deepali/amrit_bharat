@@ -8,6 +8,7 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\HashtagController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\EventCategoryController;
+use App\Http\Controllers\VideoCommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -166,6 +167,13 @@ Route::prefix('manage-videos')->group(function () {
     Route::delete('/delete/{id}', [VideoController::class, 'destroy'])->name('manage-videos.delete');
 });
 
+
+Route::prefix('video-comments')->group(function () {
+    Route::get('/', [VideoCommentController::class, 'index'])->name('manage-video-comments.index');
+    Route::delete('/{id}', [VideoCommentController::class, 'destroy'])->name('manage-video-comments.destroy');
+    Route::post('/bulk-delete', [VideoCommentController::class, 'bulkDelete'])->name('manage-video-comments.bulk-delete');
+    Route::post('/{id}/toggle-status', [VideoCommentController::class, 'toggleStatus'])->name('video-comments.toggle-status');
+});
 
 
 Route::prefix('manage-hashtags')->middleware(['auth'])->group(function () {

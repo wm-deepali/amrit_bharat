@@ -18,47 +18,55 @@ class ApiController extends Controller
 {
     public function intro()
     {
-        $url = env('APP_URL').'/storage/app/public/intro/';
-        $data = SiteIntro::select("site_intro.id", "site_intro.heading", "site_intro.short_description",DB::raw("CONCAT('".$url."', site_intro.image) as image"))
-        ->orderBy('id', 'desc')
-        ->take(3)->get();            
-        return response()->json(['status'=>true, 'message' => 'Introduction', 'data'=>$data]);
+        $url = env('APP_URL') . '/storage/app/public/intro/';
+        $data = SiteIntro::select("site_intro.id", "site_intro.heading", "site_intro.short_description", DB::raw("CONCAT('" . $url . "', site_intro.image) as image"))
+            ->orderBy('id', 'desc')
+            ->take(3)->get();
+        return response()->json(['status' => true, 'message' => 'Introduction', 'data' => $data]);
     }
     public function country()
     {
-        $url = env('ASSET_URL').'/flags/';
+        $url = env('ASSET_URL') . '/flags/';
         $ext = '.png';
-        $countries = Country::select('id', 'code', 'name', 'phonecode', DB::raw("CONCAT(CONCAT('".$url."', LOWER(countries.code)),'".$ext."') as flag"))->get();
-        return response()->json(['status'=>true, 'message' => 'Country List', 'data'=>$countries]);
+
+        // Fetch only India
+        $countries = Country::select(
+            'id',
+            'code',
+            'name',
+            'phonecode',
+            DB::raw("CONCAT(CONCAT('" . $url . "', LOWER(countries.code)),'" . $ext . "') as flag")
+        )
+            ->where('name', 'India') // filter for India
+            ->get();
+
+        return response()->json(['status' => true, 'message' => 'Country List', 'data' => $countries]);
     }
+
 
     public function state($id)
     {
         $url = env('APP_URL');
-        if($id != '')
-        {
+        if ($id != '') {
             $states = State::select('id', 'name')->where('country_id', $id)->get();
-            return response()->json(['status'=>true, 'message' => 'State List', 'data'=>$states]);
-        }
-        else{
-            return response()->json(['status'=>false, 'message' => 'Please enter valid country id', 'data'=>[]]);
+            return response()->json(['status' => true, 'message' => 'State List', 'data' => $states]);
+        } else {
+            return response()->json(['status' => false, 'message' => 'Please enter valid country id', 'data' => []]);
         }
     }
 
     public function city($id)
     {
         $url = env('APP_URL');
-        if($id != '')
-        {
+        if ($id != '') {
             $cities = City::select('id', 'name')->where('state_id', $id)->get();
-            return response()->json(['status'=>true, 'message' => 'City List', 'data'=>$cities]);
-        }
-        else{
-            return response()->json(['status'=>false, 'message' => 'Please enter valid country id', 'data'=>[]]);
+            return response()->json(['status' => true, 'message' => 'City List', 'data' => $cities]);
+        } else {
+            return response()->json(['status' => false, 'message' => 'Please enter valid country id', 'data' => []]);
         }
     }
 
 
-   
-    
+
+
 }

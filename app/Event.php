@@ -3,6 +3,8 @@
 namespace App;
 
 use App\City;
+use App\EventBookmarkLike;
+use App\EventView;
 use App\State;
 use App\EventCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,7 +44,10 @@ class Event extends Model
     protected $appends = [
         'image_urls',
         'default_image_url',
+        'total_likes',
+        'total_views',
     ];
+
 
     /*----------------------------------------------------------
     | RELATIONSHIPS
@@ -104,4 +109,27 @@ class Event extends Model
 
         return asset('uploads/events/' . $this->default_image);
     }
+
+    public function likes()
+    {
+        return $this->hasMany(EventBookmarkLike::class);
+    }
+
+    public function views()
+    {
+        return $this->hasMany(EventView::class);
+    }
+
+    // Total likes (only where likes = 1)
+    public function getTotalLikesAttribute()
+    {
+        return $this->likes()->where('likes', 1)->count();
+    }
+
+    // Total unique views (count distinct IPs)
+    public function getTotalViewsAttribute()
+    {
+        return $this->views()->distinct('ip_address')->count('ip_address');
+    }
+
 }

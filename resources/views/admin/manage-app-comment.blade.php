@@ -51,8 +51,8 @@
                             <a href="{{ route('postdetail',[$comment->post->categories[0]->category->slug,$comment->post->slug]) }}" target="_blank">{{ $comment->post->title }}</a>
                             @endif
                           </td>
-                          <td>{{ $comment->status }}</td>
                           <td><a href="javascript:void(0)" class="cu-info" comment_id="{{ $comment->id }}">Comment/User Info</a></td>
+                          <td>{{ $comment->status }}</td>
                           <td>
                             <ul class="action">
                               @if ($comment->status=='Block')

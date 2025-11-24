@@ -33,7 +33,8 @@
 
                 {{-- FILTER TABS --}}
                 <div class="mt-3">
-                    <a href="{{ url('manage-videos') }}" class="tab-btn {{ $type == 'all' ? 'tab-active' : '' }}">All</a>
+                    <a href="{{ url('manage-videos') }}"
+                        class="tab-btn {{ $type == 'all' ? 'tab-active' : '' }}">All</a>
 
                     <a href="{{ url('manage-videos?type=pending') }}"
                         class="tab-btn {{ $type == 'pending' ? 'tab-active' : '' }}">Pending</a>
@@ -65,6 +66,8 @@
                                 <th>Title</th>
                                 <th>Short Description</th>
                                 <th>YouTube Link</th>
+                                <th>Total Views</th>
+                                <th>Total Likes</th>
                                 <th>Status</th>
                                 <th width="150">Actions</th>
                             </tr>
@@ -96,6 +99,12 @@
                                     {{-- YouTube Link --}}
                                     <td>
                                         <a href="{{ $video->youtube_link }}" target="_blank">Open Video</a>
+                                    </td>
+                                    <td>
+                                        {{ $video->views }}
+                                    </td>
+                                    <td>
+                                        {{ $video->total_likes }}
                                     </td>
 
                                     {{-- STATUS --}}

@@ -9,6 +9,7 @@
         display: inline-block;
         margin-right: 10px;
     }
+
     .tab-active {
         background: #000;
         color: #fff;
@@ -31,10 +32,13 @@
 
                 {{-- TABS --}}
                 <div class="mt-3">
-                    <a href="{{ url('manage-events') }}" class="tab-btn {{ $type=='all' ? 'tab-active':'' }}">All</a>
-                    <a href="{{ url('manage-events?type=pending') }}" class="tab-btn {{ $type=='pending' ? 'tab-active':'' }}">Pending</a>
-                    <a href="{{ url('manage-events?type=published') }}" class="tab-btn {{ $type=='published' ? 'tab-active':'' }}">Published</a>
-                    <a href="{{ url('manage-events?type=rejected') }}" class="tab-btn {{ $type=='rejected' ? 'tab-active':'' }}">Rejected</a>
+                    <a href="{{ url('manage-events') }}" class="tab-btn {{ $type == 'all' ? 'tab-active' : '' }}">All</a>
+                    <a href="{{ url('manage-events?type=pending') }}"
+                        class="tab-btn {{ $type == 'pending' ? 'tab-active' : '' }}">Pending</a>
+                    <a href="{{ url('manage-events?type=published') }}"
+                        class="tab-btn {{ $type == 'published' ? 'tab-active' : '' }}">Published</a>
+                    <a href="{{ url('manage-events?type=rejected') }}"
+                        class="tab-btn {{ $type == 'rejected' ? 'tab-active' : '' }}">Rejected</a>
                 </div>
 
             </div>
@@ -44,7 +48,7 @@
 
 <section class="content-main-body">
     <div class="container">
-        
+
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -56,6 +60,8 @@
                                 <th>Event Name</th>
                                 <th>Event Date</th>
                                 <th>Venue</th>
+                                <th>Total Views</th>
+                                <th>Total Likes</th>
                                 <th>Status</th>
                                 <th width="150">Actions</th>
                             </tr>
@@ -92,6 +98,14 @@
                                     {{-- VENUE --}}
                                     <td>{{ $event->venue }}</td>
 
+                                    <td>
+                                        {{ $event->total_views }}
+                                    </td>
+                                    <td>
+                                        {{ $event->total_likes }}
+                                    </td>
+
+
                                     {{-- STATUS --}}
                                     <td>
                                         @if($event->status == 'pending')
@@ -105,11 +119,12 @@
 
                                     {{-- ACTION --}}
                                     <td>
-                                        <a href="{{ url('manage-events/view/'.$event->id) }}" class="btn btn-sm btn-info">View</a>
-                                        <a href="{{ url('manage-events/edit/'.$event->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="{{ url('manage-events/view/' . $event->id) }}"
+                                            class="btn btn-sm btn-info">View</a>
+                                        <a href="{{ url('manage-events/edit/' . $event->id) }}"
+                                            class="btn btn-sm btn-primary">Edit</a>
 
-                                        <button class="btn btn-sm btn-danger delete-event"
-                                                data-id="{{ $event->id }}">
+                                        <button class="btn btn-sm btn-danger delete-event" data-id="{{ $event->id }}">
                                             Delete
                                         </button>
                                     </td>

@@ -119,7 +119,7 @@
         let status = $(this).data('status');
 
         $.ajax({
-            url: "{{ url('videos/update-status') }}/" + id,
+            url: "{{ url('manage-videos/update-status') }}/" + id,
             type: "POST",
             data: {
                 status: status,
