@@ -58,6 +58,7 @@ Route::get('guest/related-news', [PostController::class, 'getRelatedPostGuest'])
 
 Route::get('events', [EventController::class, 'index']);
 Route::get('event-categories', [EventController::class, 'getCategories']);
+Route::get('events/by-category/{category_id}', [EventController::class, 'getEventsByCategory']);
 Route::get('videos/all', [VideoController::class, 'allVideos']); // all published videos
 Route::get('banners/all', [BannerController::class, 'allBanners']); // all published videos
 

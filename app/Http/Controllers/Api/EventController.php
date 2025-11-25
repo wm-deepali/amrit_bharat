@@ -163,6 +163,40 @@ class EventController extends Controller
     }
 
 
+    public function getEventsByCategory(Request $request, $category)
+    {
+        // Detect category by ID or slug
+        $categoryObj = EventCategory::where('id', $category)
+            ->orWhere('slug', $category)
+            ->first();
+
+        if (!$categoryObj) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Category not found'
+            ], 404);
+        }
+
+        // Base query
+        $query = Event::with('user', 'city', 'state')
+            ->where('status', 'published')
+            ->where('category_id', $categoryObj->id);
+
+        // Optional: Apply search if needed
+        if ($request->filled('search')) {
+            $query = $this->applySearch($query, $request->search);
+        }
+
+        $events = $query->latest()->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Events fetched successfully',
+            'category' => $categoryObj->name,
+            'data' => $events
+        ]);
+    }
+
     public function myEvents()
     {
         $user = Auth::user();
