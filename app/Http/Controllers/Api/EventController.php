@@ -187,7 +187,13 @@ class EventController extends Controller
             $query = $this->applySearch($query, $request->search);
         }
 
+
         $events = $query->latest()->get();
+
+        // Hide images in output but DO NOT unset it
+        foreach ($events as $event) {
+            $event->makeHidden(['images']);
+        }
 
         return response()->json([
             'status' => true,
@@ -233,7 +239,22 @@ class EventController extends Controller
             ], 401);
         }
 
-        $event = Event::with('user', 'city', 'state')->find($id);
+        $event = Event::with('user', 'city', 'state', 'category:id,name')->find($id);
+
+        if (!$event) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Event not found'
+            ], 404);
+        }
+
+        // 👉 Add category_name under category_id
+        $event->category_name = $event->category ? $event->category->name : null;
+
+        // Remove full category object if not needed
+        unset($event->category);
+
+
 
         if (!$event) {
             return response()->json([
