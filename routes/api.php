@@ -137,8 +137,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
     Route::prefix('videos')->group(function () {
-        Route::get('/my', [VideoController::class, 'myVideos']);   // videos of auth user
+        // STATIC routes first
+        Route::get('/my', [VideoController::class, 'myVideos']);
+        Route::get('/my-comments', [VideoCommentController::class, 'myComments']);
+
+        // DYNAMIC routes last
         Route::get('/{id}', [VideoController::class, 'show']);
+
         Route::post('/', [VideoController::class, 'store']);
         Route::post('/update/{id}', [VideoController::class, 'update']);
         Route::delete('/{id}', [VideoController::class, 'destroy']);
@@ -148,6 +153,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/remove-like', [VideoController::class, 'removeLike']);
 
         // Comment routes
+        Route::get('/comments/{video_id}', [VideoCommentController::class, 'allComments']);
         Route::post('/comment/add', [VideoCommentController::class, 'addComment']);
         Route::post('/comment/edit', [VideoCommentController::class, 'editComment']);
         Route::delete('/comment/delete', [VideoCommentController::class, 'deleteComment']);
@@ -156,6 +162,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/comment/add-like', [VideoCommentController::class, 'addLike']);
         Route::post('/comment/remove-like', [VideoCommentController::class, 'removeLike']);
     });
+
 
 
     Route::prefix('hashtags')->group(function () {

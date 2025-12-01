@@ -71,16 +71,22 @@
 
                                     {{-- Status --}}
                                     <td>
-                                        <span
-                                            class="badge badge-{{ $comment->status == 'Approved' ? 'success' : 'danger' }}"
-                                            id="statusBadge{{ $comment->id }}">
+                                        <span class="badge" id="statusBadge{{ $comment->id }}">
                                             {{ $comment->status }}
                                         </span>
-                                        <button class="btn btn-sm btn-secondary mt-1 update-status"
+                                        <select class="form-control form-control-sm mt-1 update-status"
                                             data-id="{{ $comment->id }}">
-                                            Toggle
-                                        </button>
+                                            <option value="Pending" {{ $comment->status == 'Pending' ? 'selected' : '' }}>
+                                                Pending in Review</option>
+                                            <option value="Approved" {{ $comment->status == 'Approved' ? 'selected' : '' }}>
+                                                Approved</option>
+                                            <option value="Rejected" {{ $comment->status == 'Rejected' ? 'selected' : '' }}>
+                                                Rejected</option>
+                                            <option value="Blocked" {{ $comment->status == 'Blocked' ? 'selected' : '' }}>
+                                                Blocked</option>
+                                        </select>
                                     </td>
+
 
                                     <td>
                                         <button class="btn btn-sm btn-danger delete-comment" data-id="{{ $comment->id }}">
@@ -165,21 +171,35 @@
         });
     });
 
-    // TOGGLE STATUS
-    $(document).on('click', '.update-status', function () {
+
+    // UPDATE STATUS VIA DROPDOWN
+    $(document).on('change', '.update-status', function () {
         let id = $(this).data('id');
+        let newStatus = $(this).val();
 
         $.ajax({
             url: "/video-comments/" + id + "/toggle-status",
             type: "POST",
-            data: { _token: "{{ csrf_token() }}" },
+            data: { _token: "{{ csrf_token() }}", status: newStatus },
             success: function (res) {
                 if (res.status) {
                     let badge = $('#statusBadge' + id);
-                    badge.text(res.new_status);
-                    badge.removeClass('badge-success badge-danger')
-                        .addClass(res.new_status == 'Approved' ? 'badge-success' : 'badge-danger');
-                    toastr.success('Status updated to ' + res.new_status);
+                    badge.text(newStatus);
+
+                    // Set badge color based on status
+                    badge.removeClass('badge-success badge-warning badge-danger badge-secondary');
+                    switch (newStatus) {
+                        case 'Approved':
+                            badge.addClass('badge-success'); break;
+                        case 'Pending':
+                            badge.addClass('badge-warning'); break;
+                        case 'Rejected':
+                            badge.addClass('badge-danger'); break;
+                        case 'Blocked':
+                            badge.addClass('badge-secondary'); break;
+                    }
+
+                    toastr.success('Status updated to ' + newStatus);
                 } else {
                     toastr.error(res.message);
                 }

@@ -121,22 +121,22 @@ class VideoController extends Controller
             ]);
         }
 
-        $comments = $video->comments->sortByDesc('created_at')->map(function ($comment) use ($user) {
-            return [
-                'id' => $comment->id,
-                'user' => [
-                    'id' => $comment->user->id,
-                    'name' => $comment->user->name,
-                    'image' => $comment->user->image ? env('APP_URL') . '/storage/app/public/' . $comment->user->image : env('APP_URL') . '/public/front/images/logo.png'
-                ],
-                'comment' => $comment->comment,
-                'is_edit' => $comment->is_edit,
-                'total_likes' => $comment->reactions->where('likes', 1)->count(),
-                'liked_by_auth_user' => $comment->reactions->where('user_id', $user->id)->where('likes', 1)->isNotEmpty(),
-                'created_at' => $comment->created_at
-            ];
-        });
-        $video->videocomments = $comments;
+        // $comments = $video->comments->sortByDesc('created_at')->map(function ($comment) use ($user) {
+        //     return [
+        //         'id' => $comment->id,
+        //         'user' => [
+        //             'id' => $comment->user->id,
+        //             'name' => $comment->user->name,
+        //             'image' => $comment->user->image ? env('APP_URL') . '/storage/app/public/' . $comment->user->image : env('APP_URL') . '/public/front/images/logo.png'
+        //         ],
+        //         'comment' => $comment->comment,
+        //         'is_edit' => $comment->is_edit,
+        //         'total_likes' => $comment->reactions->where('likes', 1)->count(),
+        //         'liked_by_auth_user' => $comment->reactions->where('user_id', $user->id)->where('likes', 1)->isNotEmpty(),
+        //         'created_at' => $comment->created_at
+        //     ];
+        // });
+        // $video->videocomments = $comments;
 
         return response()->json([
             'status' => true,

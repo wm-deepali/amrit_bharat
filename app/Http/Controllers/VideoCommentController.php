@@ -37,17 +37,22 @@ class VideoCommentController extends Controller
     }
 
     // Toggle status
-    public function toggleStatus($id)
+    public function toggleStatus(Request $request, $id)
     {
-        $comment = VideoComment::findOrFail($id);
+        $comment = VideoComment::find($id);
+        if (!$comment) {
+            return response()->json(['status' => false, 'message' => 'Comment not found']);
+        }
 
-        $comment->status = $comment->status == 'Approved' ? 'Blocked' : 'Approved';
+        $validStatuses = ['Approved', 'Pending', 'Rejected', 'Blocked'];
+        if (!in_array($request->status, $validStatuses)) {
+            return response()->json(['status' => false, 'message' => 'Invalid status']);
+        }
+
+        $comment->status = $request->status;
         $comment->save();
 
-        return response()->json([
-            'status' => true,
-            'new_status' => $comment->status
-        ]);
+        return response()->json(['status' => true, 'new_status' => $comment->status]);
     }
 
 

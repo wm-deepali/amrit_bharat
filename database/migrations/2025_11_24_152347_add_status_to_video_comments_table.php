@@ -9,8 +9,8 @@ class AddStatusToVideoCommentsTable extends Migration
     public function up()
     {
         Schema::table('video_comments', function (Blueprint $table) {
-            $table->enum('status', ['Approved', 'Blocked'])
-                  ->default('Approved')
+            $table->enum('status', ['Approved', 'Blocked', 'Pending', 'Rejected'])
+                  ->default('Pending')
                   ->after('comment'); // adjust column position as needed
         });
     }

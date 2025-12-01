@@ -54,6 +54,7 @@ class VideoCommentController extends Controller
             'user_id' => $user->id,
             'video_id' => $video->id,
             'comment' => $request->comment,
+            'status' => 'Pending'
         ]);
 
         return response()->json([
@@ -237,4 +238,74 @@ class VideoCommentController extends Controller
             'data' => []
         ]);
     }
+
+    /**************************************
+     * Get All Comments of a Video
+     **************************************/
+    public function allComments($video_id)
+    {
+        $user = Auth::user();
+
+        if (!$user || $user->delete_status != '0') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Your account is inactive',
+                'data' => []
+            ], 401);
+        }
+
+        // Fetch all comments with user details
+        $comments = VideoComment::with('user')
+            ->where('video_id', $video_id)
+            ->orderBy('id', 'DESC')
+            ->where('status', 'Approved')
+            ->get()
+            ->map(function ($comment) use ($user) {
+
+                // Check if logged in user liked this comment
+                $isLike = CommentLike::where('comment_id', $comment->id)
+                    ->where('user_id', $user->id)
+                    ->where('likes', 1)
+                    ->exists();
+
+                return [
+                    'id' => $comment->id,
+                    'comment' => $comment->comment,
+                    'total_likes' => $comment->total_likes,  // already stored in DB
+                    'is_like' => $isLike,               // boolean
+                    'created_at' => $comment->created_at,
+
+                    'user' => [
+                        'id' => $comment->user->id,
+                        'name' => $comment->user->name,
+                        'image' => $comment->user->image ? env('APP_URL') . '/storage/app/public/' . $comment->user->image : env('APP_URL') . '/public/front/images/logo.png'
+                    ]
+                ];
+            });
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Comments fetched successfully',
+            'data' => $comments
+        ], 200);
+    }
+
+    public function myComments(Request $request)
+    {
+        $user = $request->user(); // get authenticated user
+
+        // Fetch all comments by this user with related video info
+        $comments = VideoComment::with('video:id,title')
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Comments by user',
+            'data' => $comments
+        ]);
+    }
+
+
 }
