@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class VideoController extends Controller
 {
@@ -83,6 +84,7 @@ class VideoController extends Controller
 
     // VIEW SINGLE VIDEO
 // -----------------------------
+
     public function show($id)
     {
         $user = Auth::user();
@@ -121,28 +123,40 @@ class VideoController extends Controller
             ]);
         }
 
-        // $comments = $video->comments->sortByDesc('created_at')->map(function ($comment) use ($user) {
-        //     return [
-        //         'id' => $comment->id,
-        //         'user' => [
-        //             'id' => $comment->user->id,
-        //             'name' => $comment->user->name,
-        //             'image' => $comment->user->image ? env('APP_URL') . '/storage/app/public/' . $comment->user->image : env('APP_URL') . '/public/front/images/logo.png'
-        //         ],
-        //         'comment' => $comment->comment,
-        //         'is_edit' => $comment->is_edit,
-        //         'total_likes' => $comment->reactions->where('likes', 1)->count(),
-        //         'liked_by_auth_user' => $comment->reactions->where('user_id', $user->id)->where('likes', 1)->isNotEmpty(),
-        //         'created_at' => $comment->created_at
-        //     ];
-        // });
-        // $video->videocomments = $comments;
+        // -----------------------------
+        // Detect YouTube duration
+        // -----------------------------
+        $duration = null;
+
+        if ($video->youtube_link) {
+            // Extract YouTube video ID
+            preg_match("/(?:v=|\/)([a-zA-Z0-9_-]{11})/", $video->youtube_link, $matches);
+            if (isset($matches[1])) {
+                $youtubeId = $matches[1];
+                $apiKey = env('YOUTUBE_API_KEY');
+
+                $response = Http::get("https://www.googleapis.com/youtube/v3/videos", [
+                    'part' => 'contentDetails',
+                    'id' => $youtubeId,
+                    'key' => $apiKey
+                ]);
+
+                if ($response->ok() && !empty($response['items'][0]['contentDetails']['duration'])) {
+                    $isoDuration = $response['items'][0]['contentDetails']['duration'];
+                    $interval = new \DateInterval($isoDuration);
+                    $duration = $interval->format('%H:%I:%S'); // Convert ISO8601 to HH:MM:SS
+                }
+            }
+        }
+
+        $video->duration = $duration;
 
         return response()->json([
             'status' => true,
             'data' => $video,
         ]);
     }
+
 
 
 
