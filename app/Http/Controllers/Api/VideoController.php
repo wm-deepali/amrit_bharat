@@ -39,6 +39,11 @@ class VideoController extends Controller
 
         $videos = $query->latest()->get();
 
+        foreach ($videos as $video) {
+            $video->duration = $this->getYoutubeDuration($video->youtube_link);
+        }
+
+
         return response()->json([
             'status' => true,
             'data' => $videos
@@ -75,6 +80,9 @@ class VideoController extends Controller
         }
 
         $videos = $query->latest()->get();
+        foreach ($videos as $video) {
+            $video->duration = $this->getYoutubeDuration($video->youtube_link);
+        }
 
         return response()->json([
             'status' => true,
@@ -122,35 +130,6 @@ class VideoController extends Controller
                 'ip_address' => $ip
             ]);
         }
-
-        // -----------------------------
-        // Detect YouTube duration
-        // -----------------------------
-        $duration = null;
-
-        if ($video->youtube_link) {
-            // Extract YouTube video ID
-            preg_match("/(?:v=|\/)([a-zA-Z0-9_-]{11})/", $video->youtube_link, $matches);
-            if (isset($matches[1])) {
-                $youtubeId = $matches[1];
-                $apiKey = env('YOUTUBE_API_KEY');
-
-                $response = Http::get("https://www.googleapis.com/youtube/v3/videos", [
-                    'part' => 'contentDetails',
-                    'id' => $youtubeId,
-                    'key' => $apiKey
-                ]);
-
-                if ($response->ok() && !empty($response['items'][0]['contentDetails']['duration'])) {
-                    $isoDuration = $response['items'][0]['contentDetails']['duration'];
-                    $interval = new \DateInterval($isoDuration);
-                    $duration = $interval->format('%H:%I:%S'); // Convert ISO8601 to HH:MM:SS
-                }
-            }
-        }
-
-        $video->duration = $duration;
-
         return response()->json([
             'status' => true,
             'data' => $video,
@@ -403,6 +382,36 @@ class VideoController extends Controller
             'message' => 'Like removed successfully.',
             'data' => []
         ]);
+    }
+
+    // -----------------------------
+// GET YOUTUBE DURATION
+// -----------------------------
+    private function getYoutubeDuration($youtubeLink)
+    {
+        if (!$youtubeLink)
+            return null;
+
+        preg_match("/(?:v=|\/)([a-zA-Z0-9_-]{11})/", $youtubeLink, $matches);
+        if (!isset($matches[1]))
+            return null;
+
+        $youtubeId = $matches[1];
+        $apiKey = env('YOUTUBE_API_KEY');
+
+        $response = Http::get("https://www.googleapis.com/youtube/v3/videos", [
+            'part' => 'contentDetails',
+            'id' => $youtubeId,
+            'key' => $apiKey
+        ]);
+
+        if ($response->ok() && !empty($response['items'][0]['contentDetails']['duration'])) {
+            $isoDuration = $response['items'][0]['contentDetails']['duration'];
+            $interval = new \DateInterval($isoDuration);
+            return $interval->format('%H:%I:%S');
+        }
+
+        return null;
     }
 
 }

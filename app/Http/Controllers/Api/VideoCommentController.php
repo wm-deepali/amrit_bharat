@@ -295,7 +295,7 @@ class VideoCommentController extends Controller
         $user = $request->user(); // get authenticated user
 
         // Fetch all comments by this user with related video info
-        $comments = VideoComment::with('video:id,title')
+        $comments = VideoComment::with('video:id,title,youtube_link')
             ->where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();

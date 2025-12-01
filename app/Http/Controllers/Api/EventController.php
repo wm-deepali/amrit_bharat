@@ -95,6 +95,10 @@ class EventController extends Controller
          * No user, no city → return all India
          */
         $allEvents = (clone $baseQuery)->latest()->get();
+        // Hide images in output but DO NOT unset it
+        foreach ($allEvents as $event) {
+            $event->makeHidden(['images']);
+        }
         return $this->finalResponse($request, $allEvents);
     }
 
@@ -218,6 +222,11 @@ class EventController extends Controller
             ->latest()
             ->get();
 
+        // Hide images in output but DO NOT unset it
+        foreach ($events as $event) {
+            $event->makeHidden(['images']);
+        }
+
         return response()->json([
             'status' => true,
             'data' => $events
@@ -253,8 +262,7 @@ class EventController extends Controller
 
         // Remove full category object if not needed
         unset($event->category);
-
-
+        $event->makeHidden(['images']);
 
         if (!$event) {
             return response()->json([
@@ -314,13 +322,23 @@ class EventController extends Controller
             'venue' => 'required|string|max:255',
             'state_id' => 'required|exists:states,id',
             'city_id' => 'required|exists:cities,id',
-            'category_id' => 'required',  // removed exists rule because it can be "other"
-            'new_category' => 'required_if:category_id,other|string|max:255',
+
+            // CATEGORY (OTHER is allowed)
+            'category_id' => 'required',
+
+            // Make new category OPTIONAL unless category_id = other
+            'new_category' => 'nullable|required_if:category_id,other|string|max:255',
+
             'type' => 'required|in:free,paid',
             'price' => 'nullable|numeric|min:0',
+
             'status' => 'required|in:pending,published',
+
+            // IMAGES (optional)
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-            'default_image' => 'nullable|numeric',
+
+            // DEFAULT IMAGE INDEX OPTIONAL
+            'default_image' => 'nullable|integer',
         ]);
 
         if ($validator->fails()) {
